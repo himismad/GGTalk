@@ -1,0 +1,12 @@
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\OVCS.Core\bin\Debug\GGMeeting.Core.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\OVCS.Core\bin\Debug\GGMeeting.Core.pdb
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\OVCS.Core\obj\Debug\GGMeeting.Core.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\OVCS.Core\obj\Debug\GGMeeting.Core.pdb
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\GGMeeting.Core.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\GGMeeting.Core.pdb
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\ESBasic.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\ESFramework.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\ESBasic.xml
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\bin\Debug\ESFramework.xml
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\obj\Debug\GGMeeting.Core.dll
+D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting.Core\obj\Debug\GGMeeting.Core.pdb

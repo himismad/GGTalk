@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#f1f1f1"/>
+    <stroke android:color="#d9d9d9" android:width="0.1dip" />
+    <padding android:bottom="0dp" android:left="1dp" android:right="1dp" android:top="1dp"/>
+    
+</shape>
+<!-- From: file:/E:/Android%20Project/Oraycn/oraycnSourceCode/oraycn/gg/src/main/res/drawable-hdpi/list_child_border.xml -->

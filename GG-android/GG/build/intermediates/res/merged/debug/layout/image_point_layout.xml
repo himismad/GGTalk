@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="6dip"
+    android:layout_height="6dip"
+    android:layout_marginLeft="8dip"
+    android:layout_marginRight="8dip" >
+   
+</ImageView>
+<!-- From: file:/E:/Android%20Project/Oraycn/oraycnSourceCode/oraycn/gg/src/main/res/layout/image_point_layout.xml -->

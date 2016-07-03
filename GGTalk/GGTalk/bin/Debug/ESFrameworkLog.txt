@@ -1,0 +1,45 @@
+
+2016/5/6 14:29:04 : 普通 －－ 线程间操作无效: 从不是创建控件“label_speed”的线程访问它。 [:]    在 System.Windows.Forms.Control.get_Handle()
+   在 System.Windows.Forms.Control.SetVisibleCore(Boolean value)
+   在 System.Windows.Forms.Control.set_Visible(Boolean value)
+   在 JustLib.Controls.FileTransferItem.SetProgress2(UInt64 total, UInt64 transmitted) 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\JustLib\Controls\FileTransferingViewer\FileTransferItem.cs:行号 169
+   在 JustLib.Controls.FileTransferItem.SetProgress(UInt64 total, UInt64 transmitted) 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\JustLib\Controls\FileTransferingViewer\FileTransferItem.cs:行号 153
+   在 JustLib.Controls.FileTransferingViewer.fileTransProgress(String projectID, UInt64 total, UInt64 sended) 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\JustLib\Controls\FileTransferingViewer\FileTransferingViewer.cs:行号 273
+   在 ESPlus.FileTransceiver.CbFileSendedProgress.Invoke(String projectID, UInt64 total, UInt64 transfered)
+   在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.yeAidMNF6G6ed4emeB8(Object , Object , UInt64 total, UInt64 transfered)
+   在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.utmcpJ24WX(String  , UInt64  , UInt64  )
+   在 ESPlus.FileTransceiver.CbFileSendedProgress.Invoke(String projectID, UInt64 total, UInt64 transfered)
+   在 wVmxtHRmXSBkCpXRTXJ.eYfH75RpAu2McdqboIp.qr9XuDLQEn4ei2RgS9e(Object , Object , UInt64 total, UInt64 transfered)
+   在 wVmxtHRmXSBkCpXRTXJ.eYfH75RpAu2McdqboIp.aSJOrdniX1(FilePackage  ) 。错误类型:System.InvalidOperationException。位置：ESPlus.FileTransceiver.FileReceiver.Receive
+
+
+2016/5/6 14:30:56 : 高 －－ 未将对象引用设置到对象的实例。 [:]    在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.o4ssvUQ2DNQyu8UBxq5(Object , Object )
+   在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.asoc4NZhRl(String  , FileTransDisrupttedType  , String  )
+   在 ESPlus.FileTransceiver.CbFileTransDisruptted.Invoke(String projectID, FileTransDisrupttedType disrupttedType, String cause)
+   在 wVmxtHRmXSBkCpXRTXJ.eYfH75RpAu2McdqboIp.kKbD9jLVSbyrLVcIrDF(Object , Object , FileTransDisrupttedType disrupttedType, Object )
+   在 wVmxtHRmXSBkCpXRTXJ.eYfH75RpAu2McdqboIp.aSJOrdniX1(FilePackage  )
+   在 wVmxtHRmXSBkCpXRTXJ.eYfH75RpAu2McdqboIp.uKnOWxVYBp(FilePackage  )
+   在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.uBvD9VQDmfbSTpHr6kU(Object , Object )
+   在 FJM88NvTbd60TFpxxCo.MB6O7cvCvUSNKCxgVJA.YbTQpXkciC(String  , FilePackage  )
+   在 EiPRfdaGKPEpmWJEWUQ.MTYR5va6PhyQfPXRmDY.IX4SyI4ZYm4toMZgC9v(Object , Object , Object )
+   在 EiPRfdaGKPEpmWJEWUQ.MTYR5va6PhyQfPXRmDY.WLgefcysjK(oQsKOOnwG1UuEUVgSF  )
+   在 mPtUwMOvR97YEfAgnNc.OpEOLPOh9WiuR9uc4Pn.ProcessMessage(oQsKOOnwG1UuEUVgSF  )
+   在 t7WiODfxEqfpb4kvlW.kLQWMKK0IS0QEN7Uko.TOrCCv1HKGDFxvTGJLj(Object , Object )
+   在 t7WiODfxEqfpb4kvlW.kLQWMKK0IS0QEN7Uko.ryvRVeMO1e(oQsKOOnwG1UuEUVgSF  ) 。错误类型:System.NullReferenceException。位置：ESFramework.Passive.ContainerStylePassiveProcesser.HandleOneMessage - MessageType:303,UserID:10002,DestUserID:10001
+
+
+2016/5/6 14:57:49 : 普通 －－ 索引 -1 超出范围。
+参数名: index [:]    在 System.Windows.Forms.Control.ControlCollection.get_Item(Int32 index)
+   在 System.Windows.Forms.TabControl.TabPageCollection.RemoveAt(Int32 index)
+   在 GG2014.ChatForm.fileTransferingViewer1_AllTaskFinished() 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\GG2014\Forms\ChatForm.cs:行号 840
+   在 ESBasic.CbSimple.Invoke()
+   在 JustLib.Controls.FileTransferingViewer.flowLayoutPanel1_ControlRemoved(Object sender, ControlEventArgs e) 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\JustLib\Controls\FileTransferingViewer\FileTransferingViewer.cs:行号 387
+   在 System.Windows.Forms.Control.OnControlRemoved(ControlEventArgs e)
+   在 System.Windows.Forms.Control.ControlCollection.Remove(Control value)
+   在 JustLib.Controls.FileTransferingViewer.fileTransCompleted(TransferingProject info) 位置 D:\0.oraycn\2.ProductDemo\GG-V4.5\JustLib\Controls\FileTransferingViewer\FileTransferingViewer.cs:行号 320
+   在 ESBasic.CbGeneric`1.Invoke(T obj)
+   在 wjCjnbhDjMybIc9jQIy.Mj6ko4hXU9OUl6MghBy.jUbqMT4fDK(String  )
+   在 ESPlus.FileTransceiver.CbFileTransCompleted.Invoke(String projectID)
+   在 pD0obpO1ne732gSZkGw.eoWDQ9O5gY34ZoORwkK.BOGgGuXg5kXEfQ1er5T(Object , Object )
+   在 pD0obpO1ne732gSZkGw.eoWDQ9O5gY34ZoORwkK.fj07JPElLL() 。错误类型:System.ArgumentOutOfRangeException。位置：ESPlus.FileTransceiver.FileSender.DoSend
+

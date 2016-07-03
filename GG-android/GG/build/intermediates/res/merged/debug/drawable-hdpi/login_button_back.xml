@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="#0088ee"/>
+    <corners android:radius="10px"/>
+
+</shape>
+<!-- From: file:/E:/Android%20Project/Oraycn/oraycnSourceCode/oraycn/gg/src/main/res/drawable-hdpi/login_button_back.xml -->
