@@ -4,7 +4,7 @@ package gg.model;
  * Created by ZN on 2015/9/2.
  */
 public enum ContractType {
-   CHAT(0), GETUSERINFO(32),GETALLCONTRACTS(42),CHANGESTATUS(36),OTHERSTATUSCHANGED(37);
+   CHAT(0), GETUSERINFO(32),GETALLCONTRACTS(42),CHANGESTATUS(36),OTHERSTATUSCHANGED(37),CHATPIC(3512);
     private int type;
 
     public static ContractType getContractTypeByCode(int code) {

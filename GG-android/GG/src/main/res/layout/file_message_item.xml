@@ -25,22 +25,22 @@
 	    <ProgressBar 
 	        android:id="@+id/proccess"
 	        android:layout_height="10dp"
-	        android:layout_width="0dp"
+	        android:layout_width="80dp"
 	        android:layout_weight="1"
 	        style="@android:style/Widget.ProgressBar.Horizontal"
 	        android:max="100"
 	        />
 	    <Button
 	        android:id="@+id/file_accept"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_width="70dp"
+	        android:layout_height="50dp"
 	        
 	        android:text="@string/accept" />
 	
 	    <Button
 	        android:id="@+id/file_cancle"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
+	        android:layout_width="70dp"
+	        android:layout_height="50dp"
 	      
 	        android:text="@string/cancle"/>
 	</LinearLayout>

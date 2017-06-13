@@ -5,8 +5,9 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.oraycn.es.communicate.framework.IEngineMessageReceiveListener;
-import com.oraycn.es.communicate.framework.impl.RapidPassiveEngine;
+import com.oraycn.es.communicate.framework.EngineEventListener;
+import com.oraycn.es.communicate.framework.IRapidPassiveEngine;
+import com.oraycn.es.communicate.proto.RespLogon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,14 @@ import gg.model.UserStatus;
 /**
  * Created by ZN on 2015/9/1.
  */
-public class ChatApplication extends Application implements IEngineMessageReceiveListener {
+public class ChatApplication extends Application implements EngineEventListener {
 
     private Map<String, ChatContentBag> chatMap = new ConcurrentHashMap<String, ChatContentBag>();
     private Map<String, ArrayList<ChatMessageListener>> messageListenerMap = new ConcurrentHashMap<String, ArrayList<ChatMessageListener>>();
     private List<FriendStatusChangedListener> friendStatusChangeds = new ArrayList<FriendStatusChangedListener>();
     private GGUser MyUserInfo;
     private List<GGUser> MyFriendUserInfo;
-    private RapidPassiveEngine engine;
+    private IRapidPassiveEngine engine;
     private Handler handler = new Handler();
 
     @Override
@@ -47,7 +48,17 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
     }
 
     @Override
-    public void MessageReceived(String sourceUserID, int informationType, byte[] info, String tag) {
+    public void connectionInterrupted() {
+
+    }
+
+    @Override
+    public void connectionRebuildStart() {
+
+    }
+
+    @Override
+    public void messageReceived(String sourceUserID, int informationType, byte[] info, String tag) {
         if (informationType == ContractType.CHAT.getType()) {
             ChatContentContract content = new ChatContentContract();
             try {
@@ -63,6 +74,11 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
                 Log.d(ee.getMessage(),ee.getStackTrace().toString());
             }
         }
+    }
+
+    @Override
+    public void relogonCompleted(RespLogon respLogon) {
+
     }
 
     public List<GGUser> getMyFriendUserInfo() {
@@ -81,13 +97,8 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
         MyUserInfo = myUserInfo;
     }
 
-    public RapidPassiveEngine getEngine() {
+    public IRapidPassiveEngine getEngine() {
         return engine;
-    }
-
-    public void setEngine(RapidPassiveEngine engine) {
-        this.engine = engine;
-        AddChatEvent();
     }
 
     public void insertChatInfo(String targetUserID, ChatContentContract chatInfo) {
@@ -116,8 +127,6 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
             return null;
         }
     }
-
-
 
     public ChatContentContract getLastChatInfoOfUser(String targetUserID) {
         ChatContentBag bag = chatMap.get(targetUserID);
@@ -163,8 +172,13 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
         }
     }
 
-    private void AddChatEvent() {
-        this.getEngine().addMessageReceivedListener(this);
+    //private void AddChatEvent() {
+    //    this.getEngine().addMessageReceivedListener(this);
+    //}
+    public  void  setEngine(IRapidPassiveEngine _engine)
+    {
+        engine=_engine;
+        engine.setEngineEventListener(this);
     }
 
     public void AddChatMessageListener(String messageSender, ChatMessageListener listener) {
@@ -225,8 +239,7 @@ public class ChatApplication extends Application implements IEngineMessageReceiv
         }
 
         public void run() {
-            Toast.makeText(ChatApplication.this, text, 200)
-                    .show();
+            Toast.makeText(ChatApplication.this, text,Toast.LENGTH_LONG).show();
         }
     }
 

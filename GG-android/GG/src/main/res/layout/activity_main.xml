@@ -16,15 +16,59 @@
         android:layout_marginTop="65dip"
         android:layout_centerHorizontal="true"
         android:background="@drawable/fillet_shape"/>
+
+    <EditText
+        android:id="@+id/ip"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="50dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="15dip"
+        android:layout_below="@id/myImage"
+        android:background="@drawable/qq_password_edit"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IP"
+        android:textSize="8pt"
+        android:textColor="@android:color/darker_gray"
+        android:layout_alignLeft="@id/ip"
+        android:layout_alignTop="@id/ip"
+        android:layout_marginTop="9dip"
+        android:layout_marginLeft="3dip"/>
+
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:paddingLeft="50dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_below="@id/ip"
+        android:background="@drawable/qq_password_edit"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Port"
+        android:textSize="8pt"
+        android:textColor="@android:color/darker_gray"
+        android:layout_alignLeft="@id/port"
+        android:layout_alignTop="@id/port"
+        android:layout_marginTop="9dip"
+        android:layout_marginLeft="3dip"/>
+
     <EditText 
         android:id="@+id/qqNum"
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
-        android:layout_marginTop="15dip"
+
         android:paddingLeft="50dip"
-        android:layout_below="@id/myImage"
+        android:layout_below="@id/port"
         android:background="@drawable/qqnum_edit"/>
     
     <TextView
@@ -37,8 +81,8 @@
         android:layout_alignTop="@id/qqNum"
         android:layout_marginTop="9dip"
         android:layout_marginLeft="3dip"/>
-    
-    <EditText 
+
+    <EditText
         android:id="@+id/qqPassword"
         android:layout_width="match_parent"
         android:layout_height="40dip"
@@ -46,9 +90,10 @@
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
         android:layout_below="@id/qqNum"
+        android:inputType="numberPassword"
         android:background="@drawable/qq_password_edit"/>
-    
-     <TextView 
+
+     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="密码"

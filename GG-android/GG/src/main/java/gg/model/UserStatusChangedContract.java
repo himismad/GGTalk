@@ -1,12 +1,6 @@
 package gg.model;
 
-import com.oraycn.es.communicate.common.Consts;
-
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.DynamicChannelBuffer;
-
 import java.io.IOException;
-import java.nio.ByteOrder;
 
 import gg.example.utils.SerializeHelper;
 import io.netty.buffer.ByteBuf;
@@ -53,7 +47,7 @@ public class UserStatusChangedContract {
 
     public byte[] serialize() throws IOException {
         {
-            ChannelBuffer body = new DynamicChannelBuffer(ByteOrder.LITTLE_ENDIAN, Consts.DYNAMIC_BUFFER_LEN);
+            ByteBuf body = SerializeHelper.newBuffer();
             byte[] userBytes = this.getUserID().getBytes("UTF8");
             body.writeByte(8 + userBytes.length);
             body.writeInt(this.NewStatus);

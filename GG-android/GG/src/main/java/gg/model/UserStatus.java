@@ -1,11 +1,7 @@
 package gg.model;
 
-import com.oraycn.es.communicate.common.Consts;
-
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.DynamicChannelBuffer;
-
-import java.nio.ByteOrder;
+import gg.example.utils.SerializeHelper;
+import io.netty.buffer.ByteBuf;
 
 /**
  * Created by ZN on 2015/9/2.
@@ -27,7 +23,7 @@ public enum UserStatus
 
     public static   byte[] GetStatusBytes(UserStatus status)
     {
-        ChannelBuffer body = new DynamicChannelBuffer(ByteOrder.LITTLE_ENDIAN, Consts.DYNAMIC_BUFFER_LEN);
+        ByteBuf body = SerializeHelper.newBuffer();
 
         body.writeInt(status.getType());
 
@@ -36,7 +32,7 @@ public enum UserStatus
 
     public static  String GetStatusName(UserStatus status)
     {
-        ChannelBuffer body = new DynamicChannelBuffer(ByteOrder.LITTLE_ENDIAN, Consts.DYNAMIC_BUFFER_LEN);
+        ByteBuf body = SerializeHelper.newBuffer();
 
         String name="";
         switch (status)

@@ -1,12 +1,7 @@
 package gg.model;
 
-import com.oraycn.es.communicate.common.Consts;
-
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.DynamicChannelBuffer;
 
 import java.io.IOException;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +22,7 @@ public class ChatContentContract {
     private int G;
     private int B;
     private int FontLen = -1;
-    private String Text;
+    private String Text=" ";//此属性在只发图片时显得尤为重要，因图片需要描述在聊天文字中的索引位置;
     private byte[] TextBytes;
 
     public ChatContentContract()
@@ -128,7 +123,7 @@ public class ChatContentContract {
     }
 
     public byte[] serialize() throws Exception {
-        ChannelBuffer body = new DynamicChannelBuffer(ByteOrder.LITTLE_ENDIAN, Consts.DYNAMIC_BUFFER_LEN);
+        ByteBuf body = SerializeHelper.newBuffer();
 
         body.writeInt(ChatBoxContentLen);
         body.writeByte(this.R);

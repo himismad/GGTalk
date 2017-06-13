@@ -22,16 +22,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.oraycn.es.communicate.framework.EventListener;
-import com.oraycn.es.communicate.framework.IBasicOutter;
-import com.oraycn.es.communicate.framework.IGroupOutter;
-import com.oraycn.es.communicate.framework.impl.RapidPassiveEngine;
-import com.oraycn.es.communicate.proto.GroupMessage;
+import com.oraycn.es.communicate.core.Configuration;
+import com.oraycn.es.communicate.framework.Basic.RapidEngineFactory;
+import com.oraycn.es.communicate.framework.BasicEventListener;
+import com.oraycn.es.communicate.framework.GroupEventListener;
 import com.oraycn.es.communicate.proto.RespLogon;
-import com.oraycn.es.communicate.utils.GlobalUtil;
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -56,13 +53,13 @@ public class MainActivity extends Activity {
     ImageButton listIndicatorButton = null, deleteButtonOfEdit = null;
     ImageView currentUserImage = null;
     ListView loginList = null;
-    EditText qqEdit = null, passwordEdit = null;
+    EditText qqEdit = null, passwordEdit = null,ipEdit=null,portEdit=null;
     String[] from = {"userPhoto", "userQQ", "deletButton"};
     //用于记录当前选择的ListView中的QQ联系人条目的ID，如果是-1表示没有选择任何QQ账户，注意在向
     //List中添加条目或者删除条目时都要实时更新该currentSelectedPosition
     int[] to = {R.id.login_userPhoto, R.id.login_userQQ, R.id.login_deleteButton};
     ArrayList<HashMap<String, Object>> list = null;
-    private Logger log = Logger.getLogger(MainActivity.class);
+//    private Logger log = Logger.getLogger(MainActivity.class);
 
     private void configLog() {
         final LogConfigurator logConfigurator = new LogConfigurator();
@@ -75,11 +72,12 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        configLog();
+       // configLog();
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main);
+
         textFetchPassWord = (TextView) findViewById(R.id.fetchPassword);
         textRegister = (TextView) findViewById(R.id.registQQ);
         loginButton = (Button) findViewById(R.id.qqLoginButton);
@@ -88,6 +86,8 @@ public class MainActivity extends Activity {
         list = new ArrayList<HashMap<String, Object>>();
         currentUserImage = (ImageView) findViewById(R.id.myImage);
         qqEdit = (EditText) findViewById(R.id.qqNum);
+        ipEdit=(EditText)findViewById(R.id.ip);
+        portEdit=(EditText)findViewById(R.id.port);
         passwordEdit = (EditText) findViewById(R.id.qqPassword);
         deleteButtonOfEdit = (ImageButton) findViewById(R.id.delete_button_edit);
 
@@ -137,7 +137,6 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub
                 currentUserImage.setImageResource((Integer) list.get(arg2).get(from[0]));
                 qqEdit.setText((String) list.get(arg2).get(from[1]));
-                passwordEdit.setText("******");
                 currentSelectedPosition = arg2;
 
                 //相应完点击后List就消失，指示箭头反向！
@@ -170,8 +169,9 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-
-                login(qqEdit.getText().toString(), StringHelper.md5("1"), "192.168.5.181", 4530);
+//115.29.208.205
+                login(qqEdit.getText().toString(), StringHelper.md5(passwordEdit.getText().toString()),
+                        ipEdit.getText().toString(),Integer.parseInt(portEdit.getText().toString()));//192.168.3.50
             }
         });
     }
@@ -224,17 +224,14 @@ public class MainActivity extends Activity {
                     app.clearChart();
                     app.setEngine(null);
                 }
-                byte b = 20;
-                GlobalUtil.setMaxLengthOfUserID(b);
-                GlobalUtil.setTimeOutSecond(25);
-                RapidPassiveEngine engine = new RapidPassiveEngine();
-                engine.setHeartBeatSpanInSecs(15);
-                engine.setInterval(15000);
-                engine.setWaitResponseTimeoutInSecs(10);
-                CustomizeHandler hand = new CustomizeHandler(app);
+                app.setEngine(RapidEngineFactory.CreatePassiveEngine());
+                Configuration config = new Configuration(ip, port);
+                config.setMaxLengthOfUserId((byte) 20);
+                CustomizeHandler handler = new CustomizeHandler(app);
+                handler.setUserConfiguration(config);
                 RespLogon resp = null;
                 try {
-                    resp = engine.initialize(username, password, ip, port, hand,
+                    resp = app.getEngine().initialize(username, password, ip, port, handler,
                             MainActivity.this.getApplicationContext());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -247,81 +244,54 @@ public class MainActivity extends Activity {
                         return;
                     }
                 } else {
-                    if (engine.connected() == false)
+                    if (app.getEngine().connected() == false)
                         app.showMessage("无法连接服务器");
-                        engine.Close();
+                    app.getEngine().Close();
                     return;
                 }
-                app.setEngine(engine);
-                engine.addConnectionInterruptedListener(new EventListener() {
+                app.getEngine().getBasicOutter().addBasicEventListener(new BasicEventListener() {
                     @Override
-                    public void onEvent(Object record) {
-                        app.showMessage("服务器异常，连接断开");
+                    public void beingPushedOut() {
+                        app.showMessage("账号在别处登录，下线");
                     }
-                });
-                engine.addConnectionRebuildStartListener(new EventListener() {
-                    @Override
-                    public void onEvent(Object record) {
-                        app.showMessage("服务器已经连接");
-                    }
-                });
-                engine.addRelogonBeginListener(new EventListener() {
-                    @Override
-                    public void onEvent(Object record) {
-                        app.showMessage("开始自动重新登陆");
 
-                    }
-                });
-//                engine.addRelogonCompletedListener(new EventListener() {
-//                    @Override
-//                    public void onEvent(Object record) {
-//                        //app.showMessage("重新登录完毕,登陆结果"
-//                        //	+ ((RespLogon) record).getLogonResult());
-//                    }
-//                });
-                IBasicOutter bo = engine.getBasicOutter();
-                bo.addKickedOutListener(new EventListener() {
                     @Override
-                    public void onEvent(Object record) {
+                    public void beingKickedOut() {
                         app.showMessage("被其他用户踢出，下线");
                     }
                 });
-                bo.addPushedOutListener(new EventListener() {
+
+                app.getEngine().getGroupOutter().setGroupEventListener(new GroupEventListener() {
                     @Override
-                    public void onEvent(Object record) {
-                        app.showMessage("账号在别处登录，下线");
+                    public void broadcastReceived(String s, String s1, int i, byte[] bytes) {
+
+                    }
+
+                    @Override
+                    public void broadcastReceived2(String s, String s1, int i, byte[] bytes, String s2) {
+
+                    }
+
+                    @Override
+                    public void groupmateConnected(String s) {
+                        app.showMessage("组友" + s + "上线了!");
+                    }
+
+                    @Override
+                    public void groupmateOffline(String s) {
+                        app.showMessage("组友" + s + "下线了!");
                     }
                 });
-                IGroupOutter got = engine.getGroupOutter();
-                got.addBroadcastReceived(new EventListener() {
-                    @Override
-                    public void onEvent(Object record) {
-                        GroupMessage gm = (GroupMessage) record;
-                        //app.showMessage("groupID :" + gm.getGroupID() + "；消息为："
-                        //+ new String(gm.getContent()));
-                    }
-                });
-                got.addGroupmateConnectedListener(new EventListener() {
-                    @Override
-                    public void onEvent(Object record) {
-                        String memberID = (String) record;
-                        app.showMessage("组友" + memberID + "上线了!");
-                    }
-                });
-                got.addGroupmateOfflineListener(new EventListener() {
-                    @Override
-                    public void onEvent(Object record) {
-                        String memberID = (String) record;
-                        app.showMessage("组友" + memberID + "下线了!");
-                    }
-                });
+
                 byte[] userBytes = null;
                 try {
                     userBytes = username.getBytes("UTF8");
                 } catch (Exception ee) {
 
                 }
-                byte[] returnValue = engine.getCustomizeOutter().query(ContractType.GETUSERINFO.getType(), userBytes);
+
+                // userBytes=new byte[10];
+                byte[] returnValue = app.getEngine().getCustomizeOutter().query(ContractType.GETUSERINFO.getType(), userBytes);
 
                 GGUser ggUser = new GGUser();
 
@@ -331,7 +301,7 @@ public class MainActivity extends Activity {
 
                 }
 
-                engine.getCustomizeOutter().send(ContractType.CHANGESTATUS.getType(), UserStatus.GetStatusBytes(UserStatus.Online));
+                app.getEngine().getCustomizeOutter().send(ContractType.CHANGESTATUS.getType(), UserStatus.GetStatusBytes(UserStatus.Online));
 
                 //orayUser.setUserStatus(UserStatus.Online);
 

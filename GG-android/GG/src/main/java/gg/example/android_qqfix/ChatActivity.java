@@ -42,12 +42,10 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.oraycn.es.communicate.framework.IFileHandler;
-import com.oraycn.es.communicate.framework.IFileTransferingListener;
-import com.oraycn.es.communicate.framework.TransferingProjectManager;
 import com.oraycn.es.communicate.framework.model.SendingFileParas;
 import com.oraycn.es.communicate.framework.model.TransferingProject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -72,8 +70,8 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
     public final static int ActivityID = 0;
     public final static int HandlerOtherMessage = 2;
     public final static int FriendStatusChanged = 3;
-    public  final  static  int DisplayFileStatus=4;
-    public  final  static  int HiddenFileStatus=5;
+    public final static int DisplayFileStatus = 4;
+    public final static int HiddenFileStatus = 5;
     public static Handler chatHandler = null;
     public static String currentTabTag = "face";
     public TabSpec tabSpecFaceHistory, tabSpecFace;
@@ -104,8 +102,8 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
     private ChatApplication app;
     private String TalkingUserID;
     private List<String> faceList = null;
-    private LinearLayout title=null;
-    private Filehandler filehandler = new Filehandler();
+    private LinearLayout title = null;
+    //private Filehandler filehandler = new Filehandler();
     private ListView fileMsgListView;
     private FileMessageAdapter fileAdapter;
     private Map<String, Integer> indexMap = new HashMap<String, Integer>();
@@ -155,7 +153,7 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_chat);
         chatHandler = new MyChatHandler(Looper.myLooper());
-        title= (LinearLayout) findViewById(R.id.chat_title);
+        title = (LinearLayout) findViewById(R.id.chat_title);
         fileMsgListView = (ListView) findViewById(R.id.fileMessageList);
         fileAdapter = new FileMessageAdapter(this, this);
         fileMsgListView.setAdapter(fileAdapter);
@@ -163,8 +161,8 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         faceMap = new HashMap<String, Integer>();
         chatList = new ArrayList<HashMap<String, Object>>();
         app = (ChatApplication) getApplication();
-        app.getEngine().setFileHandler(filehandler);
-        app.getEngine().setFileTransferingEvents(filehandler);
+
+        app.getEngine().getFileOutter().setFileEventListener(new FileEventListener());
         TalkingUserID = getIntent().getStringExtra("TalkingUserID");
         faceList = Arrays.asList(faceName);
         AddChatEvent();
@@ -326,7 +324,7 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
                 } catch (Exception ee) {
 
                 }
-                app.getEngine().SendMessage(TalkingUserID, ContractType.CHAT.getType(), info, app.getMyUserInfo().getUserID(), 1024);
+                app.getEngine().sendMessage(null, ContractType.CHAT.getType(), info, TalkingUserID);
                 /**
                  * 更新数据列表，并且通过setSelection方法使ListView始终滚动在最底端
                  */
@@ -448,7 +446,7 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("person", who);
         map.put("image", who == ME ? ContactsInfo.headImgMap.get(app.getMyUserInfo().getHeadImageIndex()) :
-                        ContactsInfo.headImgMap.get(app.getMyFriendByID(TalkingUserID).getHeadImageIndex()));
+                ContactsInfo.headImgMap.get(app.getMyFriendByID(TalkingUserID).getHeadImageIndex()));
         map.put("text", text);
         chatList.add(map);
         if (who == OTHER) {
@@ -535,6 +533,28 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         }
     }
 
+    private void sendImage(String filePath) {
+
+        try {
+            Bitmap rawBitmap = BitmapFactory.decodeFile(filePath, null);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            rawBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+            byte[] byteArray = stream.toByteArray();
+
+            stream.close();
+
+            app.getEngine().getCustomizeOutter().sendBlob(this.TalkingUserID, ContractType.CHATPIC.getType(), byteArray, 1024);
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
+        //stream.close();
+
+
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         if (resultCode == Activity.RESULT_OK) {
@@ -553,7 +573,7 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
             attach.setProjectID(projectID);
 //			attach.setResumedFileItem(resumedFileItem);
             attach.setSenderID(app.getEngine().getCurrentUserID());
-			Message message = new Message();
+            Message message = new Message();
             message.what = DisplayFileStatus;
             chatHandler.sendMessage(message);
             indexMap.put(projectID, fileMsgListView.getCount() + 1);
@@ -592,8 +612,8 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
                     chatName.setText(msg.obj.toString());
                     break;
                 case ChatActivity.DisplayFileStatus:
-                    RelativeLayout.LayoutParams linearParam=(RelativeLayout.LayoutParams) title.getLayoutParams();
-                    linearParam.height = 164;
+                    RelativeLayout.LayoutParams linearParam = (RelativeLayout.LayoutParams) title.getLayoutParams();
+                    linearParam.height += 180;
                     title.setLayoutParams(linearParam);
                     fileMsgListView.setVisibility(View.VISIBLE);
 
@@ -606,8 +626,8 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
 
                     break;
                 case ChatActivity.HiddenFileStatus:
-                    RelativeLayout.LayoutParams linearParams=(RelativeLayout.LayoutParams) title.getLayoutParams();
-                    linearParams.height = 60;
+                    RelativeLayout.LayoutParams linearParams = (RelativeLayout.LayoutParams) title.getLayoutParams();
+                    linearParams.height -= 180;
                     title.setLayoutParams(linearParams);
                     fileMsgListView.setVisibility(View.GONE);
                     break;
@@ -674,28 +694,23 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         class ViewHolder {
             public ImageView imageView = null;
             public TextView textView = null;
-
         }
-
     }
 
-    class Filehandler implements IFileHandler, IFileTransferingListener {
-
+     class FileEventListener implements com.oraycn.es.communicate.framework.FileEventListener {
         @Override
-        public void fileRequestReceived(String projectID, String senderID,
-                                        String fileName, long totalSize, TransferingProject resumedFileItem,
-                                        String comment) {
+        public void fileRequestReceived(TransferingProject file) {
             Message message = new Message();
             message.what = DisplayFileStatus;
             chatHandler.sendMessage(message);
 
             FileInfo info = new FileInfo();
-            info.setComment(comment);
-            info.setFileName(fileName);
-            info.setProjectID(projectID);
-            info.setResumedFileItem(resumedFileItem);
-            info.setSenderID(senderID);
-            info.setTotalSize(totalSize);
+            info.setComment(file.getComment());
+            info.setFileName(file.getFileName());
+            info.setProjectID(file.getProjectId());
+            //info.setResumedFileItem(resumedFileItem);
+            info.setSenderID(file.getSender());
+            info.setTotalSize(file.getFileSize());
 
             fileAdapter.fileList.add(info);
             fileMsgListView.post(new Runnable() {
@@ -705,33 +720,32 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
                     fileAdapter.notifyDataSetChanged();
                 }
             });
+        }
 
+        @Override
+        public void fileResponseReceived(TransferingProject file, boolean accept) {
 
         }
 
         @Override
-        public void fileResponseReceived(boolean b) {
-
-        }
-
-        @Override
-        public void FileTransStarted(TransferingProject transferingProject) {
+        public void fileTransStarted(TransferingProject project) {
             Message message = new Message();
             message.what = DisplayFileStatus;
             chatHandler.sendMessage(message);
-            app.showMessage("开始传送文件" + transferingProject.getFileName());
+            app.showMessage("开始传送文件" + project.getFileName());
         }
 
         @Override
-        public void fileResumedTransStarted(TransferingProject transferingProject) {
-            app.showMessage("续传文件" + transferingProject.getFileName());
+        public void fileResumedTransStarted(TransferingProject project) {
+
         }
 
         @Override
-        public void fileSendedProgress(String projectID, long total, long transfered) {
-            final int currentTransfered = (int) ((float) ((float) transfered * 100 / (float) total));
-            if (indexMap.get(projectID) != null) {
-                int index = indexMap.get(projectID) - 1;
+        public void fileSendedProgress(String projectId, long totlaSize, long transfered) {
+
+            final int currentTransfered = (int) ((float) ((float) transfered * 100 / (float) totlaSize));
+            if (indexMap.get(projectId) != null) {
+                int index = indexMap.get(projectId) - 1;
                 final FileMessageAdapter.MessageHold hold = (FileMessageAdapter.MessageHold) fileMsgListView.getChildAt(index).getTag();
                 fileMsgListView.post(new Runnable() {
                     @Override
@@ -743,16 +757,14 @@ public class ChatActivity extends TabActivity implements ChatApplication.ChatMes
         }
 
         @Override
-        public void fileTransDisruptted(String projectID,
-                                        FileTransDisrupttedType disrupttedType, String cause) {
-            app.showMessage("文件["
-                    + TransferingProjectManager.getInstance().get(projectID)
-                    .getFileName() + "]传输中断:" + cause);
+        public void fileTransDisruptted(String projectId, FileEventListener.FileTransDisrupttedType
+        disrupttedType, String cause) {
+            app.showMessage("文件["+ projectId+  "]传输中断:" + cause);
         }
 
         @Override
-        public void fileTransCompleted(String s) {
-            Message message = new Message();
+        public void fileTransCompleted(String projectId) {
+                        Message message = new Message();
             message.what = HiddenFileStatus;
             chatHandler.sendMessage(message);
             app.showMessage("文件传输完成！");

@@ -63,9 +63,9 @@ public class FileMessageAdapter extends BaseAdapter {
         MessageHold hold = (MessageHold) convertView.getTag();
         //hold.user.setText(info.getSenderID());
         hold.msg.setText(info.getFileName());
-        if(info.getResumedFileItem()==null){
-            hold.accept.setVisibility(View.GONE);
-        }
+//        if(info.getResumedFileItem()==null){
+//            hold.accept.setVisibility(View.GONE);
+//        }
 
         return convertView;
     }
