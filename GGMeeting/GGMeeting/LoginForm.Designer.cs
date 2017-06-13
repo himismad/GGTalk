@@ -165,7 +165,7 @@
             this.MinimumSize = new System.Drawing.Size(333, 240);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GGMeeting视频会议系统 2015";
+            this.Text = "GGMeeting视频会议系统 2016";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1095,7 +1095,8 @@ namespace GGTalk
 
             this.emotionForm.Visible = false;
             this.emotionForm.Close();
-            
+
+            this.fileTransferingViewer.BeforeDispose();
             e.Cancel = false;
         } 
         #endregion

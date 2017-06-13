@@ -4,33 +4,6 @@
         <name>ESFramework</name>
     </assembly>
     <members>
-        <member name="T:ESPlus.Widgets.FileTransferItem">
-            <summary>
-            用于显示单个文件传送的进度状态。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Widgets.FileTransferItem.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferItem.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferItem.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferItem.FileCanceled">
-            <summary>
-            FileCanceled 当点击“取消”按钮时，将触发此事件。
-            </summary>
-        </member>
         <member name="T:ESPlus.FileTransceiver.IFileTransferingEvents">
             <summary>
             与文件传送相关的事件。
@@ -110,6 +83,56 @@
             <summary>
             网速太慢。
             </summary>
+        </member>
+        <member name="F:ESPlus.FileTransceiver.FileTransDisrupttedType.ReadFileBlocked">
+            <summary>
+            【发送方】读取文件卡住。
+            </summary>
+        </member>
+        <member name="F:ESPlus.FileTransceiver.FileTransDisrupttedType.SendThreadNotStarted">
+            <summary>
+            发送线程没有启动。
+            </summary>
+        </member>
+        <member name="F:ESPlus.FileTransceiver.FileTransDisrupttedType.Timeout4FirstPackage">
+            <summary>
+            【接收方】在一定的时间内，针对传送的目标文件，第一个文件块都尚未收到。
+            真正原因可能是：（1）网络太慢；（2）发送方ReadFileBlocked 或 SendThreadNotStarted。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Application.UIResultHandler">
+            <summary>
+            将回复回调转发到UI线程调用。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.UIResultHandler.#ctor(System.Windows.Forms.Control,ESPlus.Application.ResultHandler)">
+            <summary>
+            构造函数。
+            </summary>
+            <param name="theUI">UI控件、窗体</param>
+            <param name="handlerOnUI">将在UI线程中执行的处理器</param>
+        </member>
+        <member name="M:ESPlus.Application.UIResultHandler.Create">
+            <summary>
+            创建UI处理器。
+            </summary>        
+        </member>
+        <member name="T:ESPlus.Application.UICallbackHandler">
+            <summary>
+            将Callback回调转发到UI线程调用。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.UICallbackHandler.#ctor(System.Windows.Forms.Control,ESPlus.Application.CallbackHandler)">
+            <summary>
+            构造函数。
+            </summary>
+            <param name="theUI">UI控件、窗体</param>
+            <param name="handlerOnUI">将在UI线程中执行的处理器</param>
+        </member>
+        <member name="M:ESPlus.Application.UICallbackHandler.Create">
+            <summary>
+            创建UI处理器。
+            </summary>    
         </member>
         <member name="T:ESPlus.Application.P2PSession.Passive.Tcp.OutConnectionManager">
             <summary>
@@ -318,59 +341,12 @@
             将目标用户从当前AS中踢出，并关闭对应的连接。
             </summary>        
         </member>
-        <member name="T:ESPlus.Advanced.IAdvancedController">
-            <summary>
-            服务端引擎高级控制器。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Advanced.IAdvancedController.GetTaskQueueInfo(System.Int32@,System.Int32@)">
-            <summary>
-            当CustomizeInfoHandleMode设置为TaskQueue时，获取队列中待处理的任务个数，以及历史中最大的待处理任务个数。
-            </summary>
-            <param name="taskCount">待处理的任务个数</param>
-            <param name="maxTaskCount">历史中最大的待处理任务个数</param>
-        </member>
-        <member name="P:ESPlus.Advanced.IAdvancedController.DiagnosticsEnabled">
-            <summary>
-            是否开启诊断。默认值为false。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.IAdvancedController.DiagnosticsViewer">
-            <summary>
-            通过此接口，可以获取服务端运行的诊断信息（前提：DiagnosticsEnabled属性必须设置为true）。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.IAdvancedController.CustomizeInfoHandleMode">
-            <summary>
-            服务端自定义信息的处理模型。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.IAdvancedController.QueueWorkerThreadCount">
-            <summary>
-            当CustomizeInfoHandleMode设置为TaskQueue时，工作者线程的个数。默认值为20。
-            </summary>
-        </member>
-        <member name="T:ESPlus.Advanced.CustomizeInfoHandleMode">
-            <summary>
-            在服务端自定义信息的处理模型。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Advanced.CustomizeInfoHandleMode.IocpDirectly">
-            <summary>
-            直接在IOCP线程中处理消息。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Advanced.CustomizeInfoHandleMode.TaskQueue">
-            <summary>
-            将收到的消息先放到任务队列，然后再使用工作者线程（WorkerThread）来处理。
-            </summary>
-        </member>
         <member name="T:ESFramework.Passive.ContainerStylePassiveProcesser">
             <summary>
             客户端通过此处理器来处理接收到的所有消息。2011.01.25最后修改。
             (1)将指定MessageType的消息进行Push到responseManager以等到以后提取。    
             (2)如果AsynMessageQueueEnabled为true，则启动消息队列，所有接收到的非push消息都先放到队列中，再由后台线程逐个取出处理。
-            (3)如果AsynMessageQueueEnabled设为true，就没必要再将客户端引擎的HandleMessageAsynchronismly属性设为true了。
+            (3)如果AsynMessageQueueEnabled设为false，则将处理完一个消息后，才会接收下一个消息。
             </summary>
         </member>
         <member name="T:ESFramework.Core.IMessageProcesser">
@@ -463,7 +439,7 @@
         <member name="M:ESFramework.Core.INetworkEngine.DisposeAsyn">
             <summary>
             当不再使用当前引擎实例时，释放它。（异步方式）
-            注意：对于UDP或客户端引擎，如果消息是同步处理的(HandleMessageAsynchronismly为false)，请不要在消息处理器中调用Dispose方法，否则，会导致死锁。因为停止引擎要等到最后一条消息处理完毕才会返回。
+            注意：对于UDP或客户端引擎，如果消息是同步处理的，请不要在消息处理器中调用Dispose方法，否则，会导致死锁。因为停止引擎要等到最后一条消息处理完毕才会返回。
             可以转向调用异步的DisposeAsyn方法。
             </summary>
         </member>
@@ -529,6 +505,11 @@
         <member name="P:ESFramework.Core.INetworkEngine.Disposed">
             <summary>
             引擎实例是否已经被释放。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Core.INetworkEngine.UncompletedSendingCount4Busy">
+            <summary>
+            当通道上尚未发送完成的消息个数大于该值时，判定通道为繁忙（配合发送方法的ActionTypeOnChannelIsBusy参数使用）？默认值为：0。（小于0，表示始终判定为不繁忙）
             </summary>
         </member>
         <member name="E:ESFramework.Core.INetworkEngine.EngineDisposed">
@@ -720,106 +701,6 @@
             </summary>
             <param name="msg">未经过MesssagePipe的原始消息</param>
             <param name="foreigner">消息接受则的UserID</param>      
-        </member>
-        <member name="T:ESPlus.Widgets.FileTransferingViewer">
-            <summary>
-            文件传送查看器。用于查看与某个好友的所有文件传送的进度状态信息。
-            注意，FileTransferingViewer的所有事件都是在UI线程中触发的。
-            </summary>
-        </member>
-        <member name="T:ESPlus.Widgets.IFileTransferingViewer">
-            <summary>
-            文件传送查看器。用于查看与某个好友的所有文件传送的进度状态信息。
-            注意，FileTransferingViewer的所有事件都是在UI线程中触发的。
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.IFileTransferingViewer.FileResumedTransStarted">
-            <summary>
-            当某个文件开始续传时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.IFileTransferingViewer.FileTransCompleted">
-            <summary>
-            当某个文件传送完毕时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.IFileTransferingViewer.FileTransDisruptted">
-            <summary>
-            当某个文件传送中断时，触发该事件。参数为FileName - isSending - FileTransDisrupttedType
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.IFileTransferingViewer.FileTransStarted">
-            <summary>
-            当某个文件传送开始时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.IFileTransferingViewer.AllTaskFinished">
-            <summary>
-            当所有文件都传送完成时，触发该事件。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Widgets.IFileTransferingViewer.IsFileTransfering">
-            <summary>
-            当前是否有文件正在传送中。
-            </summary>        
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferingViewer.Initialize(System.String,ESPlus.Application.FileTransfering.Passive.IFileOutter)">
-            <summary>
-            初始化控件。
-            </summary>
-            <param name="friendUserID">要关注与哪个好友的文件传送状态。如果传入null，将显示所有正在传送的文件的状态</param>        
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferingViewer.FileTransferingViewer_Disposed(System.Object,System.EventArgs)">
-            <summary>
-             一定要在控件销毁的时候，取消预订的事件。否则，已被释放的控件的处理函数仍然会被调用，而引发"对象已经被释放"的异常。
-            </summary>        
-        </member>
-        <member name="F:ESPlus.Widgets.FileTransferingViewer.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferingViewer.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:ESPlus.Widgets.FileTransferingViewer.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferingViewer.FileResumedTransStarted">
-            <summary>
-            当某个文件开始续传时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferingViewer.FileTransCompleted">
-            <summary>
-            当某个文件传送完毕时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferingViewer.FileTransDisruptted">
-            <summary>
-            当某个文件传送中断时，触发该事件。参数为FileName - isSending - FileTransDisrupttedType
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferingViewer.FileTransStarted">
-            <summary>
-            当某个文件传送开始时，触发该事件。参数为FileName - isSending
-            </summary>
-        </member>
-        <member name="E:ESPlus.Widgets.FileTransferingViewer.AllTaskFinished">
-            <summary>
-            当所有文件都传送完成时，触发该事件。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Widgets.FileTransferingViewer.IsFileTransfering">
-            <summary>
-            当前是否有文件正在传送中。
-            </summary>   
         </member>
         <member name="T:ESPlus.Rapid.RapidEngineFactory">
             <summary>
@@ -1066,8 +947,13 @@
         </member>
         <member name="P:ESPlus.Application.Group.Server.IGroupController.GroupNotifyEnabled">
             <summary>
-            加入/退出组、上下线等事件是否通知组友。默认值为true。
+            上下线等事件是否通知组友。默认值为false。
             注意，如果关闭该选项，客户端则不能保持实时的组的状态，将导致广播信息发送出现错误（IGroupOutter.Broadcast方法）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Group.Server.IGroupController.GroupmateConnectedNotifyEnabled">
+            <summary>
+            用户上线时，是否通知其组友。默认值为true。（如果GroupNotifyEnabled为false，即使该属性设置为true，也不会开启通知。）
             </summary>
         </member>
         <member name="P:ESPlus.Application.Group.Server.IGroupController.UseGroupNotifyThread">
@@ -1243,6 +1129,73 @@
             <param name="informationType">自定义信息的类型</param>
             <returns>能处理？</returns>
         </member>
+        <member name="T:ESPlus.Application.Contacts.Server.IContactsController">
+            <summary>
+            联系人控制器。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.Broadcast(System.String,System.Int32,System.Byte[],System.String,ESFramework.ActionTypeOnChannelIsBusy)">
+            <summary>
+            在组内广播信息。
+            </summary>        
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="broadcastContent">广播的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="action">当通道繁忙时采取的操作。</param> 
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32)">
+            <summary>
+            在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。如果担心长时间阻塞调用线程，可考虑异步调用本方法。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="fragmentSize">分片传递时，片段的大小</param>        
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32,ESPlus.Application.ResultHandler,System.Object)">
+            <summary>
+            在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。如果担心长时间阻塞调用线程，可考虑异步调用本方法。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="fragmentSize">分片传递时，片段的大小</param>        
+            <param name="handler">当发送任务结束时，将回调该处理器</param>
+            <param name="handlerTag">将回传给ResultHandler的参数</param>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Server.IContactsController.BroadcastReceived">
+            <summary>
+            当服务端接收到要转发的广播消息时（BroadcastBlobListened属性决定了是否包括blob广播），触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent - tag
+            </summary>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Server.IContactsController.BroadcastFailed">
+            <summary>
+            当因为某个组成员不在线而导致对其广播失败时（不包括Blob及其片段信息），将触发该事件。参数：UserID（组成员ID） - BroadcastInformation。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlobListened">
+            <summary>
+            是否监听来自客户端的Blob广播，默认值为false。如果为true，即使客户端广播的是blob消息，也将触发BroadcastReceived事件（将需要更多的内存）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.IContactsController.ContactsDisconnectedNotifyEnabled">
+            <summary>
+            用户下线时，是否通知相关联系人。默认值为true。        
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.IContactsController.ContactsConnectedNotifyEnabled">
+            <summary>
+            用户上线时，是否通知相关联系人。默认值为true。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.IContactsController.UseContactsNotifyThread">
+            <summary>
+            联系人上下线通知是否使用单独的线程。默认值为false。       
+            </summary>
+        </member>
         <member name="T:ESFramework.Engine.Tcp.Server.TextTcpEngine">
             <summary>
             基于文本的TCP服务端引擎。    
@@ -1296,11 +1249,6 @@
             关闭所有连接。
             </summary>
         </member>
-        <member name="M:ESFramework.Engine.Tcp.Server.ITcpServerEngine.ChangeListenerState(System.Boolean)">
-            <summary>
-            关闭或开启监听器。该方法调用不影响网络引擎的消息接收和处理。
-            </summary>      
-        </member>
         <member name="M:ESFramework.Engine.Tcp.Server.ITcpServerEngine.InvalidateConnection(System.Net.IPEndPoint)">
             <summary>
             使连接失效。如果再收到该连接上的后续消息时，则自动断开连接。（比如，用于被挤掉线）
@@ -1326,6 +1274,11 @@
             获取所有在线连接的客户端的地址。
             </summary>        
         </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.ITcpServerEngine.GetPortListenerState">
+            <summary>
+            获取监听器的状态。
+            </summary>        
+        </member>
         <member name="P:ESFramework.Engine.Tcp.Server.ITcpServerEngine.MessageVerifier">
             <summary>
             服务端引擎会使用MessageVerifier来验证从每个连接上接收到的消息。如果通不过验证，引擎将会关闭对应的连接。
@@ -1344,6 +1297,11 @@
         <member name="P:ESFramework.Engine.Tcp.Server.ITcpServerEngine.ConnectionCount">
             <summary>
             当前在线连接的数量。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.ITcpServerEngine.AsynConnectionEvent">
+            <summary>
+            异步引发连接成功的事件。
             </summary>
         </member>
         <member name="P:ESFramework.Engine.Tcp.Server.ITcpServerEngine.MaxConnectionCount">
@@ -1380,6 +1338,11 @@
             监听器是否开启。
             </summary>
         </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.ITcpServerEngine.IPv6Enabled">
+            <summary>
+            是否开启对IPv6的支持。默认值为false。
+            </summary>
+        </member>
         <member name="E:ESFramework.Engine.Tcp.Server.ITcpServerEngine.ConnectionBound">
             <summary>
             当连接与具体的UserID绑定起来时（表明已经通过验证），触发该事件。
@@ -1403,11 +1366,6 @@
         <member name="E:ESFramework.Engine.Tcp.Server.ITcpServerEngine.MessageReceived2">
             <summary>
             当引擎接收到消息时触发该事件。
-            </summary>
-        </member>
-        <member name="E:ESFramework.Engine.Tcp.Server.ITcpServerEngine.ListenerStateChanged">
-            <summary>
-            当连接监听器的状态发生变化时，触发此事件。事件参数为true，表明连接监听器启动；事件参数为false，表明连接监听器已停止。
             </summary>
         </member>
         <member name="T:ESFramework.IConnectionCountGetter">
@@ -1456,6 +1414,11 @@
             <summary>
             每个通道连接上允许最大的等待发送【包括投递】以及正在发送的消息个数。
             当等待发送以及正在发送的消息个数超过该值时，将关闭对应的连接。如果设置为0，则表示不作限制。默认值为0。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.BaseTcpEngine.AsynConnectionEvent">
+            <summary>
+            异步引发连接成功的事件。
             </summary>
         </member>
         <member name="P:ESFramework.Engine.Tcp.Server.BaseTcpEngine.UseIpeAsUserID">
@@ -1585,21 +1548,6 @@
             是否记录用户安全日志。默认值为false。
             </summary>
         </member>
-        <member name="M:ESPlus.Rapid.IRapidServerEngine.Initialize(System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler)">
-            <summary>
-            完成服务端引擎的初始化，并启动服务端引擎。
-            </summary>
-            <param name="port">用于提供tcp通信服务的端口</param>
-            <param name="customizeHandler">服务器通过此接口来处理客户端提交给服务端自定义信息。</param>
-        </member>
-        <member name="M:ESPlus.Rapid.IRapidServerEngine.Initialize(System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler,ESPlus.Application.Basic.Server.IBasicHandler)">
-            <summary>
-            完成服务端引擎的初始化，并启动服务端引擎。
-            </summary>
-            <param name="port">用于提供tcp通信服务的端口</param>
-            <param name="customizeHandler">服务器通过此接口来处理客户端提交给服务端自定义信息。</param>
-            <param name="basicHandler">用于验证客户端登陆密码。如果不需要验证，则直接传入null。</param>    
-        </member>
         <member name="M:ESPlus.Rapid.IRapidServerEngine.SendMessage(System.String,System.Int32,System.Byte[],System.String)">
             <summary>
             向在线用户发送消息。如果目标用户不在线，消息将被丢弃。
@@ -1618,6 +1566,21 @@
             <param name="message">消息内容</param>
             <param name="tag">附加内容</param>
             <param name="fragmentSize">消息将被分块发送，分块的大小</param>
+        </member>
+        <member name="M:ESPlus.Rapid.IRapidServerEngine.Initialize(System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler)">
+            <summary>
+            完成服务端引擎的初始化，并启动服务端引擎。
+            </summary>
+            <param name="port">用于提供tcp通信服务的端口</param>
+            <param name="customizeHandler">服务器通过此接口来处理客户端提交给服务端自定义信息。</param>
+        </member>
+        <member name="M:ESPlus.Rapid.IRapidServerEngine.Initialize(System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler,ESPlus.Application.Basic.Server.IBasicHandler)">
+            <summary>
+            完成服务端引擎的初始化，并启动服务端引擎。
+            </summary>
+            <param name="port">用于提供tcp通信服务的端口</param>
+            <param name="customizeHandler">服务器通过此接口来处理客户端提交给服务端自定义信息。</param>
+            <param name="basicHandler">用于验证客户端登陆密码。如果不需要验证，则直接传入null。</param>    
         </member>
         <member name="M:ESPlus.Rapid.IRapidServerEngine.Close">
             <summary>
@@ -1642,7 +1605,12 @@
         </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.GroupManager">
             <summary>
-            【可选】如果需要组关系支持，则必须设置该属性。可以使用内置的动态组DynamicGroupManager。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
+            【可选】如果需要组关系支持，则必须设置该属性。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
+            </summary>
+        </member>
+        <member name="P:ESPlus.Rapid.IRapidServerEngine.ContactsManager">
+            <summary>
+            【可选】如果需要支持联系人，则必须设置该属性。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
             </summary>
         </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.IPAddressBinding">
@@ -1660,25 +1628,19 @@
             当通过ICustomizeController.QueryClient方法进行同步调用时，等待回复的最长时间。如果小于等于0，表示一直阻塞调用线程直到等到回复为止。默认值为30秒。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
             </summary>
         </member>
-        <member name="P:ESPlus.Rapid.IRapidServerEngine.WriteTimeoutInSecs">
-            <summary>
-            发送消息的超时，单位：秒。默认值：5秒。如果设置为小于等于0，则表示无限。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
-            </summary>
-        </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.AutoRespondHeartBeat">
             <summary>
             是否自动回复客户端发过来的心跳消息（将心跳消息原封不动地发回客户端）。默认值为false。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
             </summary>
         </member>
+        <member name="P:ESPlus.Rapid.IRapidServerEngine.WriteTimeoutInSecs">
+            <summary>
+            发送消息的超时，单位：秒。默认值：5秒。如果设置为小于等于0，则表示无限。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
+            </summary>
+        </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.UseAsP2PServer">
             <summary>
             是否同时作为P2P服务器运行。默认值为true（P2P服务器将使用UDP端口，端口号为当前引擎监听的端口号加1）。（如果要set该属性，则必须要在调用Initialize方法之前设置才有效。）
-            </summary>
-        </member>
-        <member name="P:ESPlus.Rapid.IRapidServerEngine.MaxChannelCacheSize">
-            <summary>
-            每个通道连接上允许最大的等待发送【包括投递】以及正在发送的消息个数。
-            当等待发送以及正在发送的消息个数超过该值时，将关闭对应的连接。如果设置为0，则表示不作限制。默认值为0。
             </summary>
         </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.ConnectionCount">
@@ -1721,11 +1683,6 @@
             通过此接口，服务端可以主动向在线用户发送/投递自定义信息。（只有在RapidServerEngine初始化成功后，才能正常使用。）
             </summary>
         </member>
-        <member name="P:ESPlus.Rapid.IRapidServerEngine.FileController">
-            <summary>
-            通过此接口，服务端可以主动向在线用户发送文件。（只有在RapidServerEngine初始化成功后，才能正常使用。）
-            </summary>
-        </member>
         <member name="P:ESPlus.Rapid.IRapidServerEngine.FriendsController">
             <summary>
             通过此接口，服务端可以控制好友通知。（只有在RapidServerEngine初始化成功后，才能正常使用。）
@@ -1734,6 +1691,16 @@
         <member name="P:ESPlus.Rapid.IRapidServerEngine.GroupController">
             <summary>
             通过此接口，服务端可以控制组友通知和主动向某个组广播信息。（只有在RapidServerEngine初始化成功后，才能正常使用。）
+            </summary>
+        </member>
+        <member name="P:ESPlus.Rapid.IRapidServerEngine.ContactsController">
+            <summary>
+            通过此接口，服务端可以控制联系人通知和主动向某个组广播信息。（只有在RapidServerEngine初始化成功后，才能正常使用。）
+            </summary>
+        </member>
+        <member name="P:ESPlus.Rapid.IRapidServerEngine.FileController">
+            <summary>
+            通过此接口，服务端可以主动向在线用户发送文件。（只有在RapidServerEngine初始化成功后，才能正常使用。）
             </summary>
         </member>
         <member name="T:ESFramework.Engine.Tcp.Server.IMessageVerifier">
@@ -1845,6 +1812,11 @@
             通过此接口，服务端可以控制好友通知。（只有在RapidServerEngine初始化成功后，才能正常使用。）
             </summary>
         </member>
+        <member name="P:ESPlus.Rapid.RapidServerEngine.ContactsController">
+            <summary>
+            通过此接口，服务端可以主动向某个组广播信息。（只有在RapidServerEngine初始化成功后，才能正常使用。）
+            </summary>
+        </member>
         <member name="P:ESPlus.Rapid.RapidServerEngine.IPAddressBinding">
             <summary>
             通过哪个IP地址提供服务。如果设为null，则表示绑定本地所有IP。默认值为null。（如果要set该属性，则必须要在调用Initialize方法之前设置才有效。）
@@ -1855,20 +1827,9 @@
             是否同时作为P2P服务器运行。默认值为true（P2P服务器将使用UDP端口，端口号为当前引擎监听的端口号加1）。（如果要set该属性，则必须要在调用Initialize方法之前设置才有效。）
             </summary>
         </member>
-        <member name="P:ESPlus.Rapid.RapidServerEngine.MaxChannelCacheSize">
-            <summary>
-            每个通道连接上允许最大的等待发送【包括投递】以及正在发送的消息个数。
-            当等待发送以及正在发送的消息个数超过该值时，将关闭对应的连接。如果设置为0，则表示不作限制。默认值为0。
-            </summary>
-        </member>
         <member name="P:ESPlus.Rapid.RapidServerEngine.P2PEnabled">
             <summary>
             客户端是否开启P2P。即使框架授权了P2P功能，也可以通过该属性关闭P2P。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Rapid.RapidServerEngine.AsynMessageQueueEnabled">
-            <summary>
-            是否开启异步消息队列。默认值为false。
             </summary>
         </member>
         <member name="P:ESPlus.Rapid.RapidServerEngine.ConnectionCount">
@@ -1996,6 +1957,21 @@
             IFilePackageMessageSender 用于将FilePackage发送出去。
             </summary>
         </member>
+        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetCustomizeInfoStatistics">
+            <summary>
+            获取自定义信息处理的统计数据。
+            </summary>        
+        </member>
+        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetUncommittedCustomizeInfos">
+            <summary>
+            获取处理尚未完成的自定义信息。
+            </summary>    
+        </member>
+        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetThreadPoolInfo">
+            <summary>
+            获取线程池信息。
+            </summary>        
+        </member>
         <member name="T:ESPlus.Application.P2PSession.Passive.IPlusP2PChannelManager">
             <summary>
             IPlusP2PChannelManager TcpChannelManager和UdpChannelManager实现了此接口。
@@ -2090,9 +2066,87 @@
             获取目标组的所有成员。
             </summary>        
         </member>
+        <member name="T:ESPlus.Application.Contacts.Passive.IContactsOutter">
+            <summary>
+            用于客户端发送与联系人操作相关的信息和广播。    
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.GetAllOnlineContacts">
+            <summary>
+            获取所有在线的联系人。
+            </summary>      
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.GetContacts">
+            <summary>
+            获取联系人列表。
+            </summary>      
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.GetGroupMembers(System.String)">
+            <summary>
+            获取组的成员。
+            </summary>        
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.Broadcast(System.String,System.Int32,System.Byte[],System.String,ESFramework.ActionTypeOnChannelIsBusy)">
+            <summary>
+            在组内广播信息。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="broadcastContent">信息的内容</param>       
+            <param name="tag">附加信息</param>   
+            <param name="action">当通道繁忙时采取的操作。</param>        
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32)">
+            <summary>
+            在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。若不想阻塞调用线程，可考虑使用异步广播重载方法。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="fragmentSize">分片传递时，片段的大小</param>         
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32,ESPlus.Application.ResultHandler,System.Object)">
+            <summary>
+            在组内异步广播大数据块信息（当前调用线程立即返回）。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="blobContent">大数据块的内容</param>  
+            <param name="tag">附加信息</param>   
+            <param name="fragmentSize">分片传递时，片段的大小</param>         
+            <param name="handler">当发送任务结束时，将回调该处理器</param>
+            <param name="handlerTag">将回传给ResultHandler的参数</param>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Passive.IContactsOutter.ContactsConnected">
+            <summary>
+            当组成员上线时，触发该事件。参数：UserID
+            </summary>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Passive.IContactsOutter.ContactsOffline">
+            <summary>
+            当组成员下线时，触发该事件。参数：UserID
+            </summary>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastReceived">
+            <summary>
+            当接收到某个组内的广播消息（包括大数据块信息）时，触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent - tag。
+            如果broadcasterID为null，表示是服务端发送的广播。
+            </summary>
+        </member>
         <member name="T:ESPlus.Application.FileTransfering.Server.IFileController">
             <summary>
             服务端的ESPlus.Application.FileTransfering.Server.FileMessageProcesser实现了该接口。    
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.FileTransfering.BaseFileController.Dispose">
+            <summary>
+            释放零速度检测线程。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.FileTransfering.BaseFileController.CheckZeroSpeedSpanInSecs">
+            <summary>
+            检测0速度的时间间隔，单位：秒。默认值20。
             </summary>
         </member>
         <member name="P:ESPlus.Application.FileTransfering.BaseFileController.FileReceiverManager">
@@ -2156,137 +2210,6 @@
             在最内部分配消息给最终的消息处理器去处理，并返回处理的结果。
             </summary>     
         </member>
-        <member name="M:ESFramework.Engine.Udp.IUdpClient.Send(System.Byte[],System.Net.IPEndPoint)">
-            <summary>
-            向指定的端点发送UDP数据报。
-            </summary>
-            <param name="rudeData">要发送的数据报</param>
-            <param name="endPoint">目标端点</param>        
-        </member>
-        <member name="M:ESFramework.Engine.Udp.IUdpClient.Post(System.Byte[],System.Net.IPEndPoint)">
-            <summary>
-            向指定的端点投递UDP数据报。
-            </summary>
-            <param name="rudeData">要投递的数据报</param>
-            <param name="endPoint">目标端点</param>        
-        </member>
-        <member name="M:ESFramework.Engine.Udp.Reliable.IReliableUdpEngine.Syn(System.Net.IPEndPoint)">
-            <summary>
-            向目标端点发送尝试连接的Syn消息。
-            </summary> 
-        </member>
-        <member name="F:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.TimeoutInSecs">
-            <summary>
-            重发超时、Vacancy反馈超时、心跳超时
-            </summary>
-        </member>
-        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.OnSynAck(System.Net.IPEndPoint,System.String)">
-            <summary>
-             接收到了来自对方的SynAck。
-            </summary>        
-        </member>
-        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.Syn(System.Net.IPEndPoint)">
-            <summary>
-            向目标端点发送尝试连接的Syn消息。
-            </summary>       
-        </member>
-        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.OnSyn(System.Byte,System.String,System.Net.IPEndPoint,ESFramework.AgileIPE)">
-            <summary>
-            接收到了来自对方的Syn消息。
-            </summary>        
-        </member>
-        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.Send(System.Byte[],System.Net.IPEndPoint)">
-            <summary>
-            将数据报增强后发送到网络。（采用可靠模式）
-            </summary>
-            <param name="rudeData">要发送的数据报</param>
-            <param name="endPoint">接收数据报的目标端点</param>        
-        </member>
-        <member name="P:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.SecondID">
-            <summary>
-            IPEndPoint作为第一ID，第二ID作为辅助标志，非必须。
-            </summary>
-        </member>
-        <member name="F:ESFramework.PasswordLevel.Administrator">
-            <summary>
-            管理密码 0 
-            </summary>
-        </member>
-        <member name="F:ESFramework.PasswordLevel.NormalUser">
-            <summary>
-            普通用户密码 1
-            </summary>
-        </member>
-        <member name="F:ESFramework.PasswordLevel.AuthenticUser">
-            <summary>
-            认证密码 2
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_SUCCESS">
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_OPEN_DEVICE_FAILED">
-            <summary>
-            打开设备失败 1
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_FIND_DEVICE_FAILED">
-            <summary>
-            未找到符合条件的设备 2
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_INVALID_PARAMETER">
-            <summary>
-            参数错误 3
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_INVALID_BLOCK_NUMBER">
-            <summary>
-            块号错误 4
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_HARDWARE_COMMUNICATE_ERROR">
-            <summary>
-            与硬件通信错误 5
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_INVALID_PASSWORD">
-            <summary>
-            密码错误 6
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_ACCESS_DENIED">
-            <summary>
-            没有权限 7
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_ALREADY_OPENED">
-            <summary>
-            设备已经打开 8
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_ALLOCATE_MEMORY_FAILED">
-            <summary>
-            内存分配失败 9
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_INVALID_UPDATE_PACKAGE">
-            <summary>
-            不合法的升级包 10
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_SYN_ERROR">
-            <summary>
-            线程同步错误 11
-            </summary>
-        </member>
-        <member name="F:ESFramework.ResultCode.LIV_OTHER_ERROR">
-            <summary>
-            其它未知异常、错误 12
-            </summary>
-        </member>
         <member name="T:ESFramework.AgileIPE">
             <summary>
             可xml配置的IPEndPoint。
@@ -2337,6 +2260,16 @@
             客户端设备的类型。
             </summary>
         </member>
+        <member name="M:ESFramework.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
+        </member>
+        <member name="M:ESFramework.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据 ，存放在buff中offset处。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
+        </member>
         <member name="T:ESPlus.Serialization.ICompactSerializer">
             <summary>
             ICompactSerializer 紧凑序列化器，产生紧凑的字节流。
@@ -2367,26 +2300,9 @@
             <param name="obj">要序列化的对象</param>
             <returns>序列化结果</returns>
         </member>
-        <member name="T:ESPlus.Widgets.EnhancedUdpSessionStateViewer">
+        <member name="T:ESPlus.Serialization.NotSerializedCompactlyAttribute">
             <summary>
-            用于监控当前客户端建立的所有UDP Session的状态。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Widgets.EnhancedUdpSessionStateViewer.components">
-            <summary> 
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Widgets.EnhancedUdpSessionStateViewer.Dispose(System.Boolean)">
-            <summary> 
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:ESPlus.Widgets.EnhancedUdpSessionStateViewer.InitializeComponent">
-            <summary> 
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
+            用于标记不需要进行紧凑序列化的字段或属性。
             </summary>
         </member>
         <member name="T:ESPlus.FileTransceiver.FileReceiver">
@@ -2407,6 +2323,11 @@
         <member name="P:ESPlus.FileTransceiver.IFileReceiver.CurrentTempFilePath">
             <summary>
             被中断传送的文件的临时路径
+            </summary>
+        </member>
+        <member name="F:ESPlus.FileTransceiver.FileReceiver.callReceiveCount">
+            <summary>
+            已接收FilePackage的个数
             </summary>
         </member>
         <member name="P:ESPlus.FileTransceiver.FileReceiver.CurrentTempFilePath">
@@ -2462,6 +2383,11 @@
             <summary>
             使用可靠的TCP来发送退出进程通知。2015.03.20
             </summary>    
+        </member>
+        <member name="M:ESPlus.Application.P2PSession.Passive.IP2PSessionOutter.SendPMTUTestAck(System.String,System.UInt16)">
+            <summary>
+            使用可靠的TCP回复来自UDP的PMTUTest。2015.03.11
+            </summary>        
         </member>
         <member name="T:ESPlus.Application.P2PSession.PublicIPEResponseContract">
             <summary>
@@ -2628,6 +2554,36 @@
             信息的内容
             </summary>
         </member>
+        <member name="T:ESPlus.Application.BroadcastInformation">
+            <summary>
+            一个完整的广播信息。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.SourceID">
+            <summary>
+            广播信息的发送者。可以为UserID或者NetServer.SystemUserID。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.GroupID">
+            <summary>
+            广播信息的接收组的ID。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.BroadcastType">
+            <summary>
+            广播信息类型
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.Content">
+            <summary>
+            广播信息的内容
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.Tag">
+            <summary>
+            附加信息。
+            </summary>
+        </member>
         <member name="T:ESPlus.Application.Group.Server.GroupMessageProcesser">
             <summary>
             与ESPlatform结合：
@@ -2773,7 +2729,7 @@
             第二个参数为接收到Syn的SecondID
             </summary>
         </member>
-        <member name="M:ESPlus.Application.P2PSession.Passive.Udp.UdpChannelManager.Initialize(System.String,System.String,System.Boolean,ESPlus.Application.P2PSession.Passive.IP2PSessionOutter)">
+        <member name="M:ESPlus.Application.P2PSession.Passive.Udp.UdpChannelManager.Initialize(System.String,System.String,ESPlus.Application.P2PSession.Passive.IP2PSessionOutter)">
             <summary>
             Initialize 初始化。也可以是断线重连成功时，再度重新初始化。
             </summary>     
@@ -2861,6 +2817,38 @@
             当前信息类型空间的最大值。
             </summary>
         </member>
+        <member name="T:ESPlus.Application.Contacts.Server.IContactsManager">
+            <summary>
+            联系人管理器接口。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsManager.GetContacts(System.String)">
+            <summary>
+            获取用户的相关联系人。
+            </summary>       
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsManager.GetGroupMemberList(System.String)">
+            <summary>
+            获取目标组的所有成员。
+            </summary>        
+        </member>
+        <member name="T:ESPlus.Application.Contacts.Server.ContactsMessageProcesser">
+            <summary>
+            与ESPlatform结合：
+            (1)由事件（比如加入组）发生的宿主服务器（即导致事件发生的用户所在的服务器）负责通知群内成员或群友。
+            (2)如果事件是由平台或服务端触发，同理，则由目标用户所在的服务器负责通知。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.ContactsMessageProcesser.UserManager">
+            <summary>
+            本地用户管理器
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.Server.ContactsMessageProcesser.PlatformUserManager">
+            <summary>
+            平台用户管理器
+            </summary>
+        </member>
         <member name="T:ESPlus.Application.ResultHandler">
             <summary>
             发送消息（异步）任务结束后的回调处理器。
@@ -2875,40 +2863,6 @@
             <param name="ee">如果为TimeoutException，表示超时没有回复；如果为HandingException，表示处理方在处理时抛出异常。只有为null时，response参数才有效。</param>
             <param name="response">回复消息</param>
             <param name="tag">状态数据</param>
-        </member>
-        <member name="T:ESPlus.Application.UIResultHandler">
-            <summary>
-            将回复回调转发到UI线程调用。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Application.UIResultHandler.#ctor(System.Windows.Forms.Control,ESPlus.Application.ResultHandler)">
-            <summary>
-            构造函数。
-            </summary>
-            <param name="theUI">UI控件、窗体</param>
-            <param name="handlerOnUI">将在UI线程中执行的处理器</param>
-        </member>
-        <member name="M:ESPlus.Application.UIResultHandler.Create">
-            <summary>
-            创建UI处理器。
-            </summary>        
-        </member>
-        <member name="T:ESPlus.Application.UICallbackHandler">
-            <summary>
-            将Callback回调转发到UI线程调用。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Application.UICallbackHandler.#ctor(System.Windows.Forms.Control,ESPlus.Application.CallbackHandler)">
-            <summary>
-            构造函数。
-            </summary>
-            <param name="theUI">UI控件、窗体</param>
-            <param name="handlerOnUI">将在UI线程中执行的处理器</param>
-        </member>
-        <member name="M:ESPlus.Application.UICallbackHandler.Create">
-            <summary>
-            创建UI处理器。
-            </summary>    
         </member>
         <member name="T:ESPlus.Application.Basic.Server.BasicMessageProcesser">
             <summary>
@@ -2960,11 +2914,6 @@
             BeingPushedOutNotify 当某在线用户被同名用户挤掉时，将给被挤掉的用户发送该通知。
             </summary>
         </member>
-        <member name="P:ESPlus.Application.Basic.BasicMessageTypeRoom.PingByP2PChannel">
-            <summary>
-            其他在线用户。协议为PingContract
-            </summary>
-        </member>
         <member name="P:ESPlus.Application.Basic.BasicMessageTypeRoom.KickOut">
             <summary>
             KickOut 请求服务器将某个在线用户踢出（发出BeingKickedOutNotify通知，断开连接）
@@ -3000,6 +2949,11 @@
             查询用户是否在线。请求协议为QueryOnlineContract，回复协议为ResOnlineContract
             </summary>
         </member>
+        <member name="P:ESPlus.Application.Basic.BasicMessageTypeRoom.PingByP2PChannel">
+            <summary>
+            其他在线用户。协议为PingContract
+            </summary>
+        </member>
         <member name="T:ESFramework.Engine.Tcp.Passive.ITcpPassiveEngine">
             <summary>
             客户端TCP引擎。 封装了数据接收线程，完全向客户端隐藏了网络通信细节。
@@ -3007,7 +2961,7 @@
             zhuweisky 2006.01.12
             </summary>
         </member>
-        <member name="M:ESFramework.Engine.Tcp.Passive.ITcpPassiveEngine.CloseConnection">
+        <member name="M:ESFramework.Engine.Tcp.Passive.ITcpPassiveEngine.CloseConnection(System.Boolean)">
             <summary>
             主动关闭与服务器的连接。如果AutoReconnect为true，将引发自动重连。
             </summary>
@@ -3065,7 +3019,7 @@
         </member>
         <member name="P:ESFramework.Engine.Tcp.Passive.ITcpPassiveEngine.WriteTimeoutInMSecs">
             <summary>
-            给每个连接发送数据超时时间（默认为-1，无限）。如果在指定的时间内未将数据发送完，则将记录异常到日志，并关闭对应的连接。
+            给每个连接发送数据超时时间（默认为-1，无限）。如果在指定的时间内未将数据发送完（即数据还未提交到Socket缓冲区），则将记录异常到日志，并关闭对应的连接。
             该属性只对同步模式发送数据有效，异步发送数据则无法设定超时时间。
             最好给该属性赋一个有限值，因为在某些情况下，发送数据可能会导致无限阻塞。
             </summary>
@@ -3130,6 +3084,55 @@
             <summary>
             Buffer 用于接收消息头的缓冲区。
             </summary>
+        </member>
+        <member name="T:ESFramework.PortListenerState">
+            <summary>
+            端口监听器的状态
+            </summary>
+        </member>
+        <member name="P:ESFramework.PortListenerState.LastDetectTime">
+            <summary>
+            最后一次检测新TCP连接的时间。
+            </summary>
+        </member>
+        <member name="P:ESFramework.PortListenerState.IsListening">
+            <summary>
+            是否正在监听端口？
+            </summary>
+        </member>
+        <member name="P:ESFramework.PortListenerState.IsAuthorized">
+            <summary>
+            是否授权？
+            </summary>
+        </member>
+        <member name="P:ESFramework.PortListenerState.IsMaxConnection">
+            <summary>
+            已经到达最大连接数？
+            </summary>
+        </member>
+        <member name="P:ESFramework.PortListenerState.ListenThreadRunning">
+            <summary>
+            监听线程是否运行中？
+            </summary>
+        </member>
+        <member name="M:ESFramework.Engine.Udp.IUdpClient.Send(System.Byte[],System.Net.IPEndPoint)">
+            <summary>
+            向指定的端点发送UDP数据报。
+            </summary>
+            <param name="rudeData">要发送的数据报</param>
+            <param name="endPoint">目标端点</param>        
+        </member>
+        <member name="M:ESFramework.Engine.Udp.IUdpClient.Post(System.Byte[],System.Net.IPEndPoint)">
+            <summary>
+            向指定的端点投递UDP数据报。
+            </summary>
+            <param name="rudeData">要投递的数据报</param>
+            <param name="endPoint">目标端点</param>        
+        </member>
+        <member name="M:ESFramework.Engine.Udp.Reliable.IReliableUdpEngine.Syn(System.Net.IPEndPoint)">
+            <summary>
+            向目标端点发送尝试连接的Syn消息。
+            </summary> 
         </member>
         <member name="T:ESPlus.Serialization.SerializeException">
             <summary>
@@ -3316,6 +3319,11 @@
             是否为代表服务器的虚拟用户ID，即NetServer.SystemUserID
             </summary>       
         </member>
+        <member name="M:ESFramework.CycleVerifier.#ctor">
+            <summary>
+            给客户端BasicPassiveProcesser调用。 2015.05.04
+            </summary>
+        </member>
         <member name="M:ESFramework.CycleVerifier.IsOnInternet">
             <summary>
             连接授权服务器验证是否已经授权。如果网络异常、调用异常、或未授权都将返回false。
@@ -3324,7 +3332,9 @@
         </member>
         <member name="T:ESFramework.AuthorizedSNChecker">
             <summary>
-            机器信息（硬盘ID、MAC地址）验证器
+            机器信息（硬盘ID、MAC地址）验证器。
+            结合LimittedSNChecker使用可以进一步验证SN过期时间。
+            当使用有期限的SN时，首先调用AuthorizedSNChecker进行SN验证（AgileTcpListener.authorizedSN），一段时间后，在调用LimittedSNChecker进行过期时间验证！
             </summary>
         </member>
         <member name="M:ESFramework.AuthorizedSNChecker.CheckAuthorizedSN(System.String)">
@@ -3342,20 +3352,170 @@
             获取网卡MAC地址
             </summary>      
         </member>
-        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetCustomizeInfoStatistics">
+        <member name="T:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader">
             <summary>
-            获取自定义信息处理的统计数据。
-            </summary>        
+            WebSocket 数据帧头。（2个字节）
+            </summary>
         </member>
-        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetUncommittedCustomizeInfos">
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.#ctor(System.Byte[])">
             <summary>
-            获取处理尚未完成的自定义信息。
-            </summary>    
+            构造函数
+            </summary>
+            <remarks>主要用于解析接收数据</remarks>
         </member>
-        <member name="M:ESPlus.Advanced.IDiagnosticsViewer.GetThreadPoolInfo">
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.SByte,System.Boolean,System.Int32)">
             <summary>
-            获取线程池信息。
+            构造函数
+            </summary>
+            <remarks>主要用于发送封装数据</remarks>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.GetBytes">
+            <summary>
+            返回帧头字节
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.FIN">
+            <summary>
+            FIN
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.RSV1">
+            <summary>
+            RSV1
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.RSV2">
+            <summary>
+            RSV2
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.RSV3">
+            <summary>
+            RSV3
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.OpCode">
+            <summary>
+            OpCode
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.HasMask">
+            <summary>
+            是否有掩码
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrameHeader.Length">
+            <summary>
+            Payload Length
+            </summary>
+        </member>
+        <member name="T:ESFramework.Engine.Tcp.Server.Web.DataFrame">
+            <summary>
+            WebSocket 数据帧
+            </summary>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrame.Parse(System.Byte[],System.Int32,System.Int32@)">
+            <summary>
+            构造函数
+            </summary>
+            <remarks>主要用于解析接收数据</remarks>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrame.Mask(System.Byte[],System.Byte[])">
+            <summary>
+            加掩码运算
+            </summary>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrame.#ctor(System.Byte[],System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <remarks>主要用于发送封装数据</remarks>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.DataFrame.ToStream">
+            <summary>
+            获取适合传送的字节数据
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.DataFrame.Content">
+            <summary>
+            获取真正的内容数据。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Application.Basic.Server.IBasicHandler.VerifyUser(System.String,System.String,System.String,System.String@)">
+            <summary>
+            客户端登陆验证。
             </summary>        
+            <param name="userID">登陆用户账号</param>
+            <param name="systemToken">系统标志。用于验证客户端是否与服务端属于同一系统。</param>
+            <param name="password">登陆密码</param>
+            <param name="failureCause">如果登录失败，该out参数指明失败的原因</param>
+            <returns>如果密码和系统标志都正确则返回true；否则返回false。</returns>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.Common">
+            <summary>
+            普通信息。信息将被ICustomizeHandler接口的HandleInformation方法处理。
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.Query">
+            <summary>
+            同步调用信息，信息将被ICustomizeHandler接口的HandleQuery方法处理。
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.DirectByRapidEngine">
+            <summary>
+            通过引擎直接发送的引擎，将被IRapidServerEngine.MessageReceived事件的处理函数处理。
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.Login">
+            <summary>
+            登录请求（对应IBasicHandler的VerifyUser方法）
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.GetGroupmates">
+            <summary>
+            获取组友请求
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.GetGroupMembers">
+            <summary>
+            获取组成员请求
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.InformationStyle.GetFriendsList">
+            <summary>
+            获取好友列表请求
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecord.StartTime">
+            <summary>
+            将信息提交给ICustomizeHandler处理器的时间。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecord.InformationType">
+            <summary>
+            被处理的信息类型
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecord.TimeSpent">
+            <summary>
+            处理信息所话费的时间（毫秒）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.InformationType">
+            <summary>
+            被统计的消息类型。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.CallCount">
+            <summary>
+            收到目标类型消息的总个数。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.ExceptionCount">
+            <summary>
+            处理目标类型消息抛出异常的个数。
+            </summary>
         </member>
         <member name="T:ESPlus.Core.StreamContratAttribute">
             <summary>
@@ -3657,6 +3817,38 @@
             丢弃消息
             </summary>
         </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.TimeoutInSecs">
+            <summary>
+            重发超时、Vacancy反馈超时、心跳超时
+            </summary>
+        </member>
+        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.OnSynAck(System.Net.IPEndPoint,System.String)">
+            <summary>
+             接收到了来自对方的SynAck。
+            </summary>        
+        </member>
+        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.Syn(System.Net.IPEndPoint)">
+            <summary>
+            向目标端点发送尝试连接的Syn消息。
+            </summary>       
+        </member>
+        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.OnSyn(System.Byte,System.String,System.Net.IPEndPoint,ESFramework.AgileIPE)">
+            <summary>
+            接收到了来自对方的Syn消息。
+            </summary>        
+        </member>
+        <member name="M:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.Send(System.Byte[],System.Net.IPEndPoint)">
+            <summary>
+            将数据报增强后发送到网络。（采用可靠模式）
+            </summary>
+            <param name="rudeData">要发送的数据报</param>
+            <param name="endPoint">接收数据报的目标端点</param>        
+        </member>
+        <member name="P:ESFramework.Engine.Udp.Reliable.ReliableUdpEngine.SecondID">
+            <summary>
+            IPEndPoint作为第一ID，第二ID作为辅助标志，非必须。
+            </summary>
+        </member>
         <member name="F:ESFramework.Engine.Udp.Reliable.ReliableDatagramType.Data">
             <summary>
             包含了应用层数据的数据报。并且该应用层的数据必须保证被正序地传送给接收方。
@@ -3735,6 +3927,56 @@
         <member name="P:ESFramework.Engine.Udp.Reliable.ReliableUdpHeader.BodyLength">
             <summary>
             消息体的长度。
+            </summary>
+        </member>
+        <member name="T:ESFramework.Engine.Udp.Reliable.MTUs">
+            <summary>
+            常见的网络的最大传输单元值。
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.SuperChannel">
+            <summary>
+            超通道。65535
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.TokenRing16M">
+            <summary>
+            16M令牌环。17914
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.TokenRing4M">
+            <summary>
+            4M令牌环。4464
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.FDDI">
+            <summary>
+            4352
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.Ethernet">
+            <summary>
+            以太网。1500
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.IEEE802_3">
+            <summary>
+            IEEE802.3/802.2。1492
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.X_25">
+            <summary>
+            X.25。576
+            </summary>
+        </member>
+        <member name="F:ESFramework.Engine.Udp.Reliable.MTUs.LowDelay">
+            <summary>
+            点对点，低时延。296
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Udp.Reliable.MTUs.MTUValueArrayInAscOrder">
+            <summary>
+            常见的MTU值的数组，升序排列
             </summary>
         </member>
         <member name="P:ESFramework.Engine.Udp.Reliable.OutUdpSessionState.DestIPE">
@@ -3902,6 +4144,47 @@
             当前用户的UDP身份标记。在进程生命周期内，不会被改变。
             </summary>
         </member>
+        <member name="T:ESFramework.Engine.Tcp.Server.WebSocketEngine">
+            <summary>
+            兼容WebSocket的TCP服务端二进制引擎。    
+            </summary>>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.WebSocketContextKey.JustReadBytes(System.Int32)">
+            <summary>
+            JustReadBytes 当一次数据接收完毕时，通知ContextKey本次接收了多少字节。
+            </summary>        
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.WebSocketContextKey.IsBufferFull">
+            <summary>
+            IsBufferFull 当前连接所使用的的接收缓冲区是否已经没有空位接收新的数据了。（这通常在接收缓冲区的尺寸比最大消息的尺寸要小所导致）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.WebSocketContextKey.Reset">
+            <summary>
+            Reset 将接收新数据的偏移重置到接收缓冲区的起始处。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.WebSocketContextKey.IsWebClient">
+            <summary>
+            客户端是否为WebSocket。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.WebSocketContextKey.Buffer">
+            <summary>
+            Buffer 当前连接所使用的的接收缓冲区。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.WebSocketContextKey.OffsetForReceive">
+            <summary>
+            OffsetForReceive 从当前连接所使用的接收缓冲区的哪个偏移位置开始继续接收新来的字节。
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.WebSocketContextKey.MaxSizeForReceive">
+            <summary>
+            当前连接所使用的接收缓冲区最多还可以接纳多少字节的数据。
+            </summary>
+        </member>
         <member name="T:ESPlus.Rapid.IP2PServer">
             <summary>
             用于协助P2P打洞的P2P服务器。
@@ -4017,45 +4300,6 @@
         <member name="P:ESFramework.AgileTcpClient.SocketReceiveBuffSize">
             <summary>
             SockeetReceiveBuffSize 网卡接收缓冲区大小。
-            </summary>
-        </member>
-        <member name="T:ESPlus.Widgets.MainServerForm">
-            <summary>
-            内置的TCP服务器主窗体。可显示在线用户相关数据、连接数、线程数等信息。
-            仅仅用于开发调试阶段或Demo演示。MainServerForm会实时刷新每个在线用户的实时状态，其对CPU资源的消耗是不可忽视的，所以在正式上线的系统中，请不要使用MainServerForm。
-            </summary>
-        </member>
-        <member name="T:ESFramework.Server.UserManagement.IUserDisplayer">
-            <summary>
-             用于显示所有在线用户的状态信息。	
-             zhuweisky 2004.04.22
-            </summary>
-        </member>
-        <member name="M:ESFramework.Server.UserManagement.IUserDisplayer.ClearAll">
-            <summary>
-            清除所有。通常是通信引擎停止时被调用。
-            </summary>
-        </member>
-        <member name="M:ESFramework.Server.UserManagement.IUserDisplayer.RemoveUser(System.String,System.String)">
-            <summary>
-            移除用户。通常在用户下线时被调用。
-            </summary>       
-        </member>
-        <member name="F:ESPlus.Widgets.MainServerForm.components">
-            <summary>
-            必需的设计器变量。
-            </summary>
-        </member>
-        <member name="M:ESPlus.Widgets.MainServerForm.Dispose(System.Boolean)">
-            <summary>
-            清理所有正在使用的资源。
-            </summary>
-            <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
-        </member>
-        <member name="M:ESPlus.Widgets.MainServerForm.InitializeComponent">
-            <summary>
-            设计器支持所需的方法 - 不要
-            使用代码编辑器修改此方法的内容。
             </summary>
         </member>
         <member name="T:ESPlus.Serialization.CompactFieldSerializer">
@@ -4212,7 +4456,12 @@
         </member>
         <member name="P:ESPlus.Application.Friends.Server.IFriendsController.FriendNotifyEnabled">
             <summary>
-            当用户上线/掉线时，是否通知其好友。默认值true。
+            当用户上线/掉线时，是否通知其好友。默认值false。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Friends.Server.IFriendsController.FriendConnectedNotifyEnabled">
+            <summary>
+            用户上线时，是否通知其好友。默认值为true。（如果FriendNotifyEnabled为false，即使该属性设置为true，也不会开启通知。）
             </summary>
         </member>
         <member name="P:ESPlus.Application.Friends.Server.IFriendsController.UseFriendNotifyThread">
@@ -4300,7 +4549,7 @@
             客户端的Tcp引擎，通过ContractFormatStyle属性指定采用的协议类型。
             </summary>
         </member>
-        <member name="M:ESFramework.Engine.Tcp.Passive.PassiveBaseTcpEngine.CloseConnection">
+        <member name="M:ESFramework.Engine.Tcp.Passive.PassiveBaseTcpEngine.CloseConnection(System.Boolean)">
             <summary>
             主动关闭与服务器的连接。如果AutoReconnect为true，将引发自动重连。
             </summary>
@@ -4317,7 +4566,7 @@
         </member>
         <member name="P:ESFramework.Engine.Tcp.Passive.PassiveBaseTcpEngine.WriteTimeoutInMSecs">
             <summary>
-            给每个连接发送数据超时时间（默认为-1，无限）。如果在指定的时间内未将数据发送完，则将记录异常到日志，并关闭对应的连接。
+            给每个连接发送数据超时时间（默认为-1，无限）。如果在指定的时间内未将数据发送完（即数据还未提交到Socket缓冲区），则将记录异常到日志，并关闭对应的连接。
             该属性只对同步模式发送数据有效，异步发送数据则无法设定超时时间。
             最好给该属性赋一个有限值，因为在某些情况下，发送数据可能会导致无限阻塞。
             </summary>
@@ -4345,56 +4594,6 @@
         <member name="T:ESFramework.ServerConfiguration">
             <summary>
             服务器的基础配置信息。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Advanced.InformationStyle.Common">
-            <summary>
-            普通信息。信息将被ICustomizeHandler接口的HandleInformation方法处理。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Advanced.InformationStyle.Query">
-            <summary>
-            同步调用信息，信息将被ICustomizeHandler接口的HandleQuery方法处理。
-            </summary>
-        </member>
-        <member name="F:ESPlus.Advanced.InformationStyle.DirectByRapidEngine">
-            <summary>
-            通过引擎直接发送的引擎，将被IRapidServerEngine.MessageReceived事件的处理函数处理。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecord.InformationStyle">
-            <summary>
-            是否为同步调用。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecord.StartTime">
-            <summary>
-            将信息提交给ICustomizeHandler处理器的时间。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecord.InformationType">
-            <summary>
-            被处理的信息类型
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecord.TimeSpent">
-            <summary>
-            处理信息所话费的时间（毫秒）。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.InformationType">
-            <summary>
-            被统计的消息类型。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.CallCount">
-            <summary>
-            收到目标类型消息的总个数。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Advanced.InfoHandleRecordStatistics.ExceptionCount">
-            <summary>
-            处理目标类型消息抛出异常的个数。
             </summary>
         </member>
         <member name="T:ESPlus.Application.FileTransfering.FileMessageTypeRoom">
@@ -4432,20 +4631,189 @@
             在接收文件夹的情况下，当文件夹中的某个文件接收完成时，必须通知发送方。如此发送方才会启动文件夹中下一个文件的发送。对应协议为SingleFileNotifyContract
             </summary>
         </member>
-        <member name="M:ESPlus.Application.Basic.Server.IBasicHandler.VerifyUser(System.String,System.String,System.String,System.String@)">
+        <member name="P:ESPlus.Application.FileTransfering.FileMessageTypeRoom.ContinueTransFile">
             <summary>
-            客户端登陆验证。
-            </summary>        
-            <param name="userID">登陆用户账号</param>
-            <param name="systemToken">系统标志。用于验证客户端是否与服务端属于同一系统。</param>
-            <param name="password">登陆密码</param>
-            <param name="failureCause">如果登录失败，该out参数指明失败的原因</param>
-            <returns>如果密码和系统标志都正确则返回true；否则返回false。</returns>
+            续传文件。
+            </summary>
         </member>
         <member name="T:ESPlus.Application.Basic.Server.EmptyBasicHandler">
             <summary>
             null object 模式的IBasicHandler实现。
             VerifyUser方法始终返回true。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Advanced.IAdvancedController">
+            <summary>
+            服务端引擎高级控制器。如果是要Set某个属性，则必须在IRapidServerEngine的Initialize方法之前。
+            </summary>
+        </member>
+        <member name="M:ESPlus.Advanced.IAdvancedController.GetTaskQueueInfo(System.Int32@,System.Int32@)">
+            <summary>
+            当CustomizeInfoHandleMode设置为TaskQueue时，获取队列中待处理的任务个数，以及历史中最大的待处理任务个数。
+            </summary>
+            <param name="taskCount">待处理的任务个数</param>
+            <param name="maxTaskCount">历史中最大的待处理任务个数</param>
+        </member>
+        <member name="M:ESPlus.Advanced.IAdvancedController.GetPortListenerState">
+            <summary>
+            获取监听器的状态。
+            </summary>        
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.IPv6Enabled">
+            <summary>
+            是否开启对IPv6的支持。默认值为false。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.SocketSendBuffSize">
+            <summary>
+            发送缓冲区的大小。默认值：8192（8K）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.WriteTimeoutInSecs">
+            <summary>
+            写超时。单位：秒。默认值：0。小于等于0表示不设定超时。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.TempFile4ResumedTTL">
+            <summary>
+            用于续传的临时文件的最大生存期，单位：秒。默认值：300。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.CheckFileZeroSpeedSpanInSecs">
+            <summary>
+            检测0速度的时间间隔，单位：秒。默认值20。设置为0，表示关闭0速度检测。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.CheckResponseTTL4Query">
+            <summary>
+            是否开启Query同步调用机制的回复生存期检查？默认值true。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.UseWorkThreadPool">
+            <summary>
+            框架的内部事务是否使用线程池中的线程？默认值：true。       
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.MaxChannelCacheSize">
+            <summary>
+            每个通道连接上允许最大的等待发送【包括投递】以及正在发送的消息个数。
+            当等待发送以及正在发送的消息个数超过该值时，将关闭对应的连接。如果设置为0，则表示不作限制。默认值为0。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.UncompletedSendingCount4Busy">
+            <summary>
+            当通道上尚未发送完成的消息个数大于该值时，判定通道为繁忙（配合发送方法的ActionTypeOnChannelIsBusy参数使用）？默认值为：0。（小于0，表示始终判定为不繁忙）
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.AsynConnectionEvent">
+            <summary>
+            是否异步引发TCP连接成功的事件？
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.DiagnosticsEnabled">
+            <summary>
+            是否开启诊断。默认值为false。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.DiagnosticsViewer">
+            <summary>
+            通过此接口，可以获取服务端运行的诊断信息（前提：DiagnosticsEnabled属性必须设置为true）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.CustomizeInfoHandleMode">
+            <summary>
+            服务端自定义信息的处理模型。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.IAdvancedController.QueueWorkerThreadCount">
+            <summary>
+            当CustomizeInfoHandleMode设置为TaskQueue时，工作者线程的个数。默认值为20。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Advanced.BaseOptions">
+            <summary>
+            客户端和服务端的公共设置。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.WriteTimeoutInSecs">
+            <summary>
+            写超时。单位：秒。客户端默认值：60。服务端默认值：0。0表示不设定超时。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.SocketSendBuffSize">
+            <summary>
+            发送缓冲区的大小。默认值：8192（8K）。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.TempFile4ResumedTTL">
+            <summary>
+            用于续传的临时文件的最大生存期，单位：秒。默认值：300。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.UseWorkThreadPool">
+            <summary>
+            框架的内部事务（如文件传送）是否使用线程池中的线程？默认值：true。       
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.CheckFileZeroSpeedSpanInSecs">
+            <summary>
+            检测0速度的时间间隔，单位：秒。默认值20。设置为0，表示关闭0速度检测。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.CheckResponseTTL4Query">
+            <summary>
+            是否开启Query同步调用机制的回复生存期检查？默认值true。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.BaseOptions.UncompletedSendingCount4Busy">
+            <summary>
+            当通道上尚未发送完成的消息个数大于该值时，判定通道为繁忙（配合发送方法的ActionTypeOnChannelIsBusy参数使用）？默认值为：0。（小于0，表示始终判定为不繁忙）
+            </summary>
+        </member>
+        <member name="T:ESPlus.Advanced.AdvancedOptions">
+            <summary>
+            客户端高级设置。如果是要Set某个属性，则必须在IRapidPassiveEngine的Initialize方法之前。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.AdvancedOptions.P2PEnabled">
+            <summary>
+            是否开启P2P。默认值true。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.AdvancedOptions.AsynMessageQueueEnabled">
+            <summary>
+            是否开启异步消息队列。默认值true。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Advanced.AdvancedController">
+            <summary>
+            服务端高级设置、控制器。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.AdvancedController.MaxChannelCacheSize">
+            <summary>
+            每个通道连接上允许最大的等待发送【包括投递】以及正在发送的消息个数。
+            当等待发送以及正在发送的消息个数超过该值时，将关闭对应的连接。如果设置为0，则表示不作限制。默认值为0。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Advanced.AdvancedController.AsynConnectionEvent">
+            <summary>
+            异步引发连接成功的事件。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Advanced.CustomizeInfoHandleMode">
+            <summary>
+            在服务端自定义信息的处理模型。
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.CustomizeInfoHandleMode.IocpDirectly">
+            <summary>
+            直接在IOCP线程中处理消息。
+            </summary>
+        </member>
+        <member name="F:ESPlus.Advanced.CustomizeInfoHandleMode.TaskQueue">
+            <summary>
+            将收到的消息先放到任务队列，然后再使用工作者线程（WorkerThread）来处理。
             </summary>
         </member>
         <member name="T:ESFramework.Core.ContractFormatStyle">
@@ -4617,6 +4985,31 @@
             ESFramework内置提供的默认的字符串编解码器，采用UTF-8对字符串进行编解码。Singleton模式。
             </summary>
         </member>
+        <member name="T:ESFramework.WSHelper">
+            <summary>
+            WSHelper 静态类。
+            </summary>
+        </member>
+        <member name="M:ESFramework.WSHelper.InvokeWebService(System.String,System.String,System.Object[])">
+            <summary>
+            InvokeWebService 动态调用web服务
+            </summary>
+            <param name="wsUrl">WebService 地址</param>
+            <param name="methodname">方法名</param>
+            <param name="args">参数，仅仅支持简单类型</param>		
+        </member>
+        <member name="M:ESFramework.WSHelper.InvokeWebService(System.String,System.String,System.String,System.Object[])">
+            <summary>
+            InvokeWebService 动态调用web服务
+            </summary>
+        </member>
+        <member name="M:ESFramework.WSHelper.GetWsProxyType(System.String,System.String)">
+            <summary>
+            GetWsProxyType 获取目标Web服务对应的代理类型
+            </summary>
+            <param name="wsUrl">目标Web服务的url</param>
+            <param name="classname">Web服务的class名称，如果不需要指定，则传入null</param>      
+        </member>
         <member name="T:ESPlus.FileTransceiver.FileReceiverManager">
             <summary>
             IFileReceiverManager 参考实现。
@@ -4704,6 +5097,21 @@
             设置UserID（包括GroupID）的最大长度(不能超过255)。注意，客户端与服务端要统一设置。
             </summary>  
         </member>
+        <member name="P:ESPlus.Application.Contacts.BroadcastContract.InformationType">
+            <summary>
+            广播信息的类型。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Application.Contacts.Groupmates">
+            <summary>
+            某个组所有的成员。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.ReqContactsContract.JustOnline">
+            <summary>
+            如果为true，表示只请求在线的好友列表；否则，请求所有好友列表。
+            </summary>
+        </member>
         <member name="T:ESPlus.Application.Basic.Passive.IBasicOutter">
             <summary>
             用于客户端向服务器发送Basic信息，并发布与自己或好友状态相关的事件。   
@@ -4711,9 +5119,8 @@
         </member>
         <member name="M:ESPlus.Application.Basic.Passive.IBasicOutter.GetMyIPE">
             <summary>
-            获取自己的IPE。
-            </summary>
-            <returns>通常是经过NAT之后的IPE</returns>
+            获取自己的IPE。(通常是经过NAT之后的IPE)
+            </summary>       
         </member>
         <member name="M:ESPlus.Application.Basic.Passive.IBasicOutter.GetUserIPE(System.String)">
             <summary>
@@ -4904,6 +5311,34 @@
             最后收到对方消息（任何数据）的时间。
             </summary>
         </member>
+        <member name="T:ESFramework.Engine.Tcp.Server.Web.Handshake">
+            <summary>
+            WebSokect 握手协议。
+            </summary>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.Handshake.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="request">请求串</param>
+        </member>
+        <member name="M:ESFramework.Engine.Tcp.Server.Web.Handshake.GetValue(System.String)">
+            <summary>
+            根据键获取对应值
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.Handshake.KeyAccept">
+            <summary>
+            返回的验证码
+            </summary>
+        </member>
+        <member name="P:ESFramework.Engine.Tcp.Server.Web.Handshake.Response">
+            <summary>
+            响应串
+            </summary>
+        </member>
         <member name="T:ESPlus.Rapid.RapidPassiveEngine">
             <summary>
             迅捷的客户端引擎。基于TCP、使用二进制协议。
@@ -4913,16 +5348,6 @@
             <summary>
             迅捷的客户端引擎。基于TCP、使用二进制协议。
             </summary>
-        </member>
-        <member name="M:ESPlus.Rapid.IRapidPassiveEngine.Initialize(System.String,System.String,System.String,System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler)">
-            <summary>
-            完成客户端引擎的初始化，与服务器建立TCP连接，连接成功后立即验证用户密码。如果连接失败，则抛出异常。
-            </summary>
-            <param name="userID">当前登录的用户ID，由数字和字母组成，最大长度为10</param>
-            <param name="logonPassword">用户登陆密码。</param>
-            <param name="serverIP">服务器的IP地址。</param>
-            <param name="serverPort">服务器的端口。</param>       
-            <param name="customizeHandler">自定义处理器，用于处理服务器或其它用户发送过来的消息</param>             
         </member>
         <member name="M:ESPlus.Rapid.IRapidPassiveEngine.SendMessage(System.String,System.Int32,System.Byte[],System.String)">
             <summary>
@@ -4955,19 +5380,35 @@
             <param name="handler">当发送任务结束时，将回调该处理器</param>
             <param name="handlerTag">将回传给ResultHandler的参数</param>
         </member>
+        <member name="M:ESPlus.Rapid.IRapidPassiveEngine.Initialize(System.String,System.String,System.String,System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler)">
+            <summary>
+            完成客户端引擎的初始化，与服务器建立TCP连接，连接成功后立即验证用户密码。如果连接失败，则抛出异常。
+            </summary>
+            <param name="userID">当前登录的用户ID，由数字和字母组成，最大长度为10</param>
+            <param name="logonPassword">用户登陆密码。</param>
+            <param name="serverIP">服务器的IP地址。</param>
+            <param name="serverPort">服务器的端口。</param>       
+            <param name="customizeHandler">自定义处理器，用于处理服务器或其它用户发送过来的消息</param>             
+        </member>
         <member name="M:ESPlus.Rapid.IRapidPassiveEngine.Close">
             <summary>
             关闭并释放客户端通信引擎。
             </summary>
         </member>
+        <member name="M:ESPlus.Rapid.IRapidPassiveEngine.CloseConnection(System.Boolean)">
+            <summary>
+            主动关闭与ESFramework服务器的连接,将引发自动重连。
+            </summary>
+            <param name="reconnectNow">是否立即重连？</param>
+        </member>
+        <member name="P:ESPlus.Rapid.IRapidPassiveEngine.Advanced">
+            <summary>
+            客户端引擎高级控制选项。如果要设置AdvancedOptions的某些属性，必须在调用Initialize方法之前设置才有效。
+            </summary>
+        </member>
         <member name="P:ESPlus.Rapid.IRapidPassiveEngine.StressTesting">
             <summary>
             是否用于性能测试（默认值：false）。如果是，则设为true，以加快客户端引擎的启动速度，方便测试。
-            </summary>
-        </member>
-        <member name="P:ESPlus.Rapid.IRapidPassiveEngine.HelpReliableUDP">
-            <summary>
-            （在基于UDP的P2P通信情况下）是否打开TCP对可靠UDP的协助，以提高可靠UDP的传送效率。（默认值：true）。（如果要set该属性，则必须在调用Initialize方法之前设置才有效。）
             </summary>
         </member>
         <member name="E:ESPlus.Rapid.IRapidPassiveEngine.ConnectionRebuildStart">
@@ -5073,6 +5514,16 @@
             该接口用于客户端发送与组操作相关的信息和广播信息。（只有Initialize方法调用成功之后，该属性才可正常使用）
             </summary>
         </member>
+        <member name="P:ESPlus.Rapid.IRapidPassiveEngine.ContactsOutter">
+            <summary>
+            该接口用于客户端发送与联系人操作相关的信息和广播。（只有Initialize方法调用成功之后，该属性才可正常使用）
+            </summary>
+        </member>
+        <member name="F:ESPlus.Rapid.RapidPassiveEngine.stressTesting">
+            <summary>
+            如果设置为true，则将：关闭P2P，关闭同步调用机制的回复超时检测线程，关闭异步消息队列，关闭心跳。
+            </summary>
+        </member>
         <member name="M:ESPlus.Rapid.RapidPassiveEngine.Initialize(System.String,System.String,System.String,System.Int32,ESPlus.Application.CustomizeInfo.ICustomizeHandler)">
             <summary>
             完成客户端引擎的初始化，与服务器建立TCP连接，连接成功后立即验证用户密码。如果连接失败，则抛出异常。
@@ -5088,7 +5539,7 @@
             关闭客户端通信引擎。
             </summary>
         </member>
-        <member name="M:ESPlus.Rapid.RapidPassiveEngine.CloseConnection">
+        <member name="M:ESPlus.Rapid.RapidPassiveEngine.CloseConnection(System.Boolean)">
             <summary>
             主动关闭与服务器的连接,将引发自动重连。
             </summary>
@@ -5161,6 +5612,11 @@
         <member name="P:ESPlus.Rapid.RapidPassiveEngine.GroupOutter">
             <summary>
             该接口用于客户端发送与组操作相关的信息和广播信息。（只有Initialize方法调用成功之后，该属性才可正常使用）
+            </summary>
+        </member>
+        <member name="P:ESPlus.Rapid.RapidPassiveEngine.ContactsOutter">
+            <summary>
+            该接口用于获取联系人列表、接收联系人状态改变通知、以及组广播。（只有Initialize方法调用成功之后，该属性才可正常使用）
             </summary>
         </member>
         <member name="P:ESPlus.Rapid.RapidPassiveEngine.HeartBeatSpanInSecs">
@@ -5347,6 +5803,22 @@
             注意：目标Contract必须是通过二进制反序列化实现的ToStream方法
             </summary>		
         </member>
+        <member name="T:ESFramework.Server.UserManagement.IUserDisplayer">
+            <summary>
+             用于显示所有在线用户的状态信息。	
+             zhuweisky 2004.04.22
+            </summary>
+        </member>
+        <member name="M:ESFramework.Server.UserManagement.IUserDisplayer.ClearAll">
+            <summary>
+            清除所有。通常是通信引擎停止时被调用。
+            </summary>
+        </member>
+        <member name="M:ESFramework.Server.UserManagement.IUserDisplayer.RemoveUser(System.String,System.String)">
+            <summary>
+            移除用户。通常在用户下线时被调用。
+            </summary>       
+        </member>
         <member name="T:ESFramework.Server.UserManagement.EmptyUserDisplayer">
             <summary>
             不显示在线用户的状态信息。NullObject模式。
@@ -5391,6 +5863,86 @@
             <summary>
             用户的携带数据（应用程序可以使用该属性保存与当前用户相关的其它信息），仅在本地使用。不会在ACMS和AS之间同步。
             </summary>        
+        </member>
+        <member name="F:ESFramework.PasswordLevel.Administrator">
+            <summary>
+            管理密码 0 
+            </summary>
+        </member>
+        <member name="F:ESFramework.PasswordLevel.NormalUser">
+            <summary>
+            普通用户密码 1
+            </summary>
+        </member>
+        <member name="F:ESFramework.PasswordLevel.AuthenticUser">
+            <summary>
+            认证密码 2
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.SUCCESS">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.OPEN_DEVICE_FAILED">
+            <summary>
+            打开设备失败 1
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.FIND_DEVICE_FAILED">
+            <summary>
+            未找到符合条件的设备 2
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.INVALID_PARAMETER">
+            <summary>
+            参数错误 3
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.INVALID_BLOCK_NUMBER">
+            <summary>
+            块号错误 4
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.HARDWARE_COMMUNICATE_ERROR">
+            <summary>
+            与硬件通信错误 5
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.INVALID_PASSWORD">
+            <summary>
+            密码错误 6
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.ACCESS_DENIED">
+            <summary>
+            没有权限 7
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.ALREADY_OPENED">
+            <summary>
+            设备已经打开 8
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.ALLOCATE_MEMORY_FAILED">
+            <summary>
+            内存分配失败 9
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.INVALID_UPDATE_PACKAGE">
+            <summary>
+            不合法的升级包 10
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.SYN_ERROR">
+            <summary>
+            线程同步错误 11
+            </summary>
+        </member>
+        <member name="F:ESFramework.ResultCode.OTHER_ERROR">
+            <summary>
+            其它未知异常、错误 12
+            </summary>
         </member>
         <member name="T:ESFramework.Server.DisconnectedType">
             <summary>
@@ -5490,6 +6042,14 @@
         <member name="F:ESPlus.Application.CustomizeInfo.Passive.ChannelMode.ByP2PChannel">
             <summary>
             使用P2P通道。如果P2P通道不存在，则丢弃消息。
+            </summary>
+        </member>
+        <member name="T:ESPlus.Application.Contacts.Passive.ContactsOutter">
+            <summary>
+            IGroupOutter 的实现。
+            (1)内置组成员及其状态缓存。
+            (2)尽可能使用P2P通道发送广播信息。
+            (3)在从服务器获取组成员时，尝试与在线的组成员创建P2P连接。
             </summary>
         </member>
         <member name="T:ESFramework.Core.IResponseManager">
@@ -5789,7 +6349,7 @@
         </member>
         <member name="E:ESPlus.Application.P2PSession.Passive.IP2PController.P2PChannelClosed">
             <summary>
-            当某个P2P Channel关闭时，触发此事件。参数为对方的UserID。
+            当某个P2P Channel关闭时，触发此事件。
             </summary>
         </member>
         <member name="E:ESPlus.Application.P2PSession.Passive.IP2PController.AllP2PChannelClosed">
@@ -5810,6 +6370,26 @@
         <member name="F:ESPlus.Application.P2PSession.Passive.P2PChannelMode.None">
             <summary>
             不建立P2P通道
+            </summary>
+        </member>
+        <member name="T:ESPlus.Application.Contacts.ContactsMessageTypeRoom">
+            <summary>
+            与联系人操作相关的所有消息类型定义。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.ContactsMessageTypeRoom.ContactsOfflineNotify">
+            <summary>
+            通知其联系人某成员掉线（S->C）。对应协议为UserContract。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.ContactsMessageTypeRoom.ContactsConnectedNotify">
+            <summary>
+             通知其联系人某成员上线（S->C）。对应协议为UserContract。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.Contacts.ContactsMessageTypeRoom.GetContracts">
+            <summary>
+            获取联系人列表。请求协议为ReqFriendsContract，回复的消息主体为ResFriendsContract。
             </summary>
         </member>
         <member name="T:ESFramework.Core.ResponseManager">
@@ -5859,11 +6439,6 @@
             当新的Tcp连接成功建立时，会触发此事件	
             </summary>
         </member>
-        <member name="P:ESFramework.AgileTcpListener.AsynConnectionEvent">
-            <summary>
-            异步引发连接成功的事件。
-            </summary>
-        </member>
         <member name="P:ESFramework.AgileTcpListener.SocketSendBuffSize">
             <summary>
             Socket(网卡)发送缓冲区的大小。默认为8k。
@@ -5877,11 +6452,6 @@
         <member name="F:ESFramework.AuthorizeType.NormalInstance">
             <summary>
             如果在封闭的局网，可正常启动；一旦连接到公网，则验证授权，授权通过后，才能继续正常工作。
-            </summary>
-        </member>
-        <member name="F:ESFramework.AuthorizeType.PublicTokenKey">
-            <summary>
-            适用于买断的情况
             </summary>
         </member>
         <member name="F:ESFramework.AuthorizeType.JustOnInternet">
@@ -5899,6 +6469,11 @@
             授权序列（硬盘和mac相关信息）
             </summary>
         </member>
+        <member name="F:ESFramework.AuthorizeType.JustInLAN">
+            <summary>
+            局网买断
+            </summary>
+        </member>
         <member name="T:ESPlus.FileTransceiver.ServerFilePackageSender">
             <summary>
             用于Server向Client发送文件包
@@ -5913,7 +6488,7 @@
             zhuweisky 2010.05.05
             </summary>
         </member>
-        <member name="M:ESPlus.Application.P2PSession.Passive.P2PController.Initialize(System.String,System.Boolean,System.Boolean)">
+        <member name="M:ESPlus.Application.P2PSession.Passive.P2PController.Initialize(System.String,System.Boolean)">
             <summary>
             当属性注入完毕后，即可调用该方法进行初始化。
             </summary>
@@ -6041,6 +6616,16 @@
         <member name="P:ESPlus.Application.CustomizeInfo.CustomizeMessageTypeRoom.BlobByRapidEngine">
             <summary>
             直接通过Rapid引擎发送的消息。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.CustomizeInfo.CustomizeMessageTypeRoom.GetClientTimeRequest">
+            <summary>
+            S->C
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.CustomizeInfo.CustomizeMessageTypeRoom.GetClientTimeResponse">
+            <summary>
+            C->S
             </summary>
         </member>
         <member name="P:ESPlus.Application.Basic.ReqLogonContract.SystemToken">

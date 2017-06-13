@@ -169,10 +169,8 @@
             // cameraConnector1
             // 
             this.cameraConnector1.AutoSynchronizeVideoToAudio = true;
-            this.cameraConnector1.BackColor = System.Drawing.Color.Black;
-            this.cameraConnector1.DrawBadFrame = false;
-            this.cameraConnector1.Location = new System.Drawing.Point(300, 21);
-            this.cameraConnector1.MaxIdleSpan4BlackScreen = 5;
+            this.cameraConnector1.BackColor = System.Drawing.Color.Black;            
+            this.cameraConnector1.Location = new System.Drawing.Point(300, 21);            
             this.cameraConnector1.Name = "cameraConnector1";
             this.cameraConnector1.Size = new System.Drawing.Size(160, 120);
             this.cameraConnector1.TabIndex = 20;

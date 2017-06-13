@@ -13,6 +13,7 @@ using OMCS.Server;
 using ESPlus.Application.CustomizeInfo;
 using System.Runtime.Remoting;
 using JustLib.NetworkDisk.Server;
+using DataRabbit.DBAccessing;
 
 /*
  * 本demo采用的是ESFramework的免费版本，不需要再次授权、也没有使用期限限制。若想获取ESFramework其它版本，请联系 www.oraycn.com 或 QQ：372841921。
@@ -40,7 +41,15 @@ namespace GGTalk.Server
                 }
                 else
                 {
-                    persister = new RealDB( ConfigurationManager.AppSettings["DBName"] ,ConfigurationManager.AppSettings["DBIP"], ConfigurationManager.AppSettings["SaPwd"]);
+                    DataBaseType dataBaseType = (DataBaseType)Enum.Parse(typeof(DataBaseType),ConfigurationManager.AppSettings["DBType"]) ;
+                    if (dataBaseType == DataBaseType.SqlServer)
+                    {
+                        persister = new RealDB(ConfigurationManager.AppSettings["DBName"], ConfigurationManager.AppSettings["DBIP"], ConfigurationManager.AppSettings["SaPwd"]);
+                    }
+                    else //MySQL
+                    {
+                        persister = new RealDB(ConfigurationManager.AppSettings["DBName"], ConfigurationManager.AppSettings["DBIP"], int.Parse(ConfigurationManager.AppSettings["DBPort"]), ConfigurationManager.AppSettings["SaPwd"]);
+                    }
                 }
 
                 GlobalCache globalCache = new GlobalCache(persister);

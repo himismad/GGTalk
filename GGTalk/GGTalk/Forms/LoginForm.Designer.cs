@@ -216,7 +216,7 @@
             this.skinLabel_SoftName.Name = "skinLabel_SoftName";
             this.skinLabel_SoftName.Size = new System.Drawing.Size(93, 20);
             this.skinLabel_SoftName.TabIndex = 18;
-            this.skinLabel_SoftName.Text = "GGTalk 2016";
+            this.skinLabel_SoftName.Text = "GGTalk 2017";
             // 
             // btnRegister
             // 

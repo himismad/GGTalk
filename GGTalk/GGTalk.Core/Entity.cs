@@ -6,6 +6,7 @@ using ESBasic.Helpers;
 using ESBasic;
 using JustLib;
 using JustLib.Controls;
+using DataRabbit.DBAccessing;
 
 namespace GGTalk
 {
@@ -453,6 +454,7 @@ namespace GGTalk
         /// <summary>
         /// 在线状态。非DB字段。
         /// </summary>
+        [NotDBField] 
         public UserStatus UserStatus
         {
             get { return userStatus; }
@@ -465,6 +467,7 @@ namespace GGTalk
         /// <summary>
         /// 可用于存储 LastWordsRecord。
         /// </summary>
+        [NotDBField] 
         public object Tag
         {
             get { return tag; }
@@ -704,6 +707,7 @@ namespace GGTalk
         #region 非DB字段
         #region Tag
         private object tag;
+        [NotDBField] 
         public object Tag
         {
             get { return tag; }

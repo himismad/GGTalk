@@ -1,0 +1,40 @@
+2016/6/23 15:19:15: OMCS initialization complete -- OMCS server Address : 127.0.0.1:4534 ，UserID ： 7960 。
+
+2016/6/23 15:19:59: OMCS initialization complete -- OMCS server Address : 127.0.0.1:4534 ，UserID ： 8284 。
+
+2016/6/23 15:21:08: OMCS initialization complete -- OMCS server Address : 127.0.0.1:4534 ，UserID ： 8960 。
+
+2016/6/23 15:21:15: Guest request device connection -- GuestID : 8960 , DeviceType : Microphone , ConnectResult : Succeed
+
+2016/6/23 15:21:16: MultimediaConnector Connect Ended -- OwnerID : 8960 , DeviceType : Microphone , ConnectResult : Succeed
+
+2016/6/23 15:21:17: Guest request device connection -- GuestID : 8960 , DeviceType : Camera , ConnectResult : Succeed
+
+2016/6/23 15:21:18: MultimediaConnector Connect Ended -- OwnerID : 8960 , DeviceType : Camera , ConnectResult : Succeed
+
+2017/2/15 9:57:56: OMCS initialization complete -- OMCS server Address : 127.0.0.1:4534 ，UserID ： 5653 。
+
+2017/2/15 9:58:13: Guest request device connection -- GuestID : 5653 , DeviceType : Camera , ConnectResult : Succeed
+
+2017/2/15 9:58:14: MultimediaConnector Connect Ended -- OwnerID : 5653 , DeviceType : Camera , ConnectResult : Succeed
+
+2017/2/15 9:58:49: MultimediaConnector Disconnected -- OwnerID : 5653 , DeviceType : Camera , DisconnectedType : GuestActiveDisconnect
+
+2017/2/15 9:58:55: Guest request device connection -- GuestID : 5653 , DeviceType : Microphone , ConnectResult : Succeed
+
+2017/2/15 9:58:55: MultimediaConnector Connect Ended -- OwnerID : 5653 , DeviceType : Microphone , ConnectResult : Succeed
+
+2017/2/15 9:58:56: MultimediaConnector Disconnected -- OwnerID : 5653 , DeviceType : Microphone , DisconnectedType : GuestActiveDisconnect
+
+2017/2/15 9:59:02: Guest request device connection -- GuestID : 5653 , DeviceType : Microphone , ConnectResult : Succeed
+
+2017/2/15 9:59:03: MultimediaConnector Connect Ended -- OwnerID : 5653 , DeviceType : Microphone , ConnectResult : Succeed
+
+2017/2/15 9:59:04: Guest request device connection -- GuestID : 5653 , DeviceType : Camera , ConnectResult : Succeed
+
+2017/2/15 9:59:05: MultimediaConnector Connect Ended -- OwnerID : 5653 , DeviceType : Camera , ConnectResult : Succeed
+
+2017/2/15 10:01:09: MultimediaConnector Disconnected -- OwnerID : 5653 , DeviceType : Microphone , DisconnectedType : GuestActiveDisconnect
+
+2017/2/15 10:01:10: MultimediaConnector Disconnected -- OwnerID : 5653 , DeviceType : Camera , DisconnectedType : GuestActiveDisconnect
+

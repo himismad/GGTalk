@@ -1134,23 +1134,46 @@
             联系人控制器。
             </summary>
         </member>
-        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.Broadcast(System.String,System.Int32,System.Byte[],ESFramework.ActionTypeOnChannelIsBusy)">
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.Broadcast(System.String,System.Int32,System.Byte[],System.String,ESFramework.ActionTypeOnChannelIsBusy)">
             <summary>
             在组内广播信息。
             </summary>        
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="broadcastContent">广播的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="action">当通道繁忙时采取的操作。</param> 
         </member>
-        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlob(System.String,System.Int32,System.Byte[],System.Int32)">
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32)">
             <summary>
             在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。如果担心长时间阻塞调用线程，可考虑异步调用本方法。
             </summary>
             <param name="groupID">接收广播信息的组ID</param>
             <param name="broadcastType">广播信息的类型</param>
-            <param name="blobContent">大数据块的内容</param>        
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
             <param name="fragmentSize">分片传递时，片段的大小</param>        
+        </member>
+        <member name="M:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32,ESPlus.Application.ResultHandler,System.Object)">
+            <summary>
+            在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。如果担心长时间阻塞调用线程，可考虑异步调用本方法。
+            </summary>
+            <param name="groupID">接收广播信息的组ID</param>
+            <param name="broadcastType">广播信息的类型</param>
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
+            <param name="fragmentSize">分片传递时，片段的大小</param>        
+            <param name="handler">当发送任务结束时，将回调该处理器</param>
+            <param name="handlerTag">将回传给ResultHandler的参数</param>
         </member>
         <member name="E:ESPlus.Application.Contacts.Server.IContactsController.BroadcastReceived">
             <summary>
-            当服务端接收到要转发的广播消息时（BroadcastBlobListened属性决定了是否包括blob广播），触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent
+            当服务端接收到要转发的广播消息时（BroadcastBlobListened属性决定了是否包括blob广播），触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent - tag
+            </summary>
+        </member>
+        <member name="E:ESPlus.Application.Contacts.Server.IContactsController.BroadcastFailed">
+            <summary>
+            当因为某个组成员不在线而导致对其广播失败时（不包括Blob及其片段信息），将触发该事件。参数：UserID（组成员ID） - BroadcastInformation。
             </summary>
         </member>
         <member name="P:ESPlus.Application.Contacts.Server.IContactsController.BroadcastBlobListened">
@@ -2063,31 +2086,34 @@
             获取组的成员。
             </summary>        
         </member>
-        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.Broadcast(System.String,System.Int32,System.Byte[],ESFramework.ActionTypeOnChannelIsBusy)">
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.Broadcast(System.String,System.Int32,System.Byte[],System.String,ESFramework.ActionTypeOnChannelIsBusy)">
             <summary>
             在组内广播信息。
             </summary>
             <param name="groupID">接收广播信息的组ID</param>
             <param name="broadcastType">广播信息的类型</param>
             <param name="broadcastContent">信息的内容</param>       
+            <param name="tag">附加信息</param>   
             <param name="action">当通道繁忙时采取的操作。</param>        
         </member>
-        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.Int32)">
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32)">
             <summary>
             在组内广播大数据块信息。直到数据发送完毕，该方法才会返回。若不想阻塞调用线程，可考虑使用异步广播重载方法。
             </summary>
             <param name="groupID">接收广播信息的组ID</param>
             <param name="broadcastType">广播信息的类型</param>
-            <param name="blobContent">大数据块的内容</param>        
+            <param name="blobContent">大数据块的内容</param>      
+            <param name="tag">附加信息</param>   
             <param name="fragmentSize">分片传递时，片段的大小</param>         
         </member>
-        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.Int32,ESPlus.Application.ResultHandler,System.Object)">
+        <member name="M:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastBlob(System.String,System.Int32,System.Byte[],System.String,System.Int32,ESPlus.Application.ResultHandler,System.Object)">
             <summary>
             在组内异步广播大数据块信息（当前调用线程立即返回）。
             </summary>
             <param name="groupID">接收广播信息的组ID</param>
             <param name="broadcastType">广播信息的类型</param>
-            <param name="blobContent">大数据块的内容</param>        
+            <param name="blobContent">大数据块的内容</param>  
+            <param name="tag">附加信息</param>   
             <param name="fragmentSize">分片传递时，片段的大小</param>         
             <param name="handler">当发送任务结束时，将回调该处理器</param>
             <param name="handlerTag">将回传给ResultHandler的参数</param>
@@ -2104,7 +2130,7 @@
         </member>
         <member name="E:ESPlus.Application.Contacts.Passive.IContactsOutter.BroadcastReceived">
             <summary>
-            当接收到某个组内的广播消息（包括大数据块信息）时，触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent。
+            当接收到某个组内的广播消息（包括大数据块信息）时，触发此事件。参数：broadcasterID - groupID - broadcastType - broadcastContent - tag。
             如果broadcasterID为null，表示是服务端发送的广播。
             </summary>
         </member>
@@ -2233,6 +2259,16 @@
             <summary>
             客户端设备的类型。
             </summary>
+        </member>
+        <member name="M:ESFramework.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
+        </member>
+        <member name="M:ESFramework.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据 ，存放在buff中offset处。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
         </member>
         <member name="T:ESPlus.Serialization.ICompactSerializer">
             <summary>
@@ -2516,6 +2552,36 @@
         <member name="P:ESPlus.Application.Information.Content">
             <summary>
             信息的内容
+            </summary>
+        </member>
+        <member name="T:ESPlus.Application.BroadcastInformation">
+            <summary>
+            一个完整的广播信息。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.SourceID">
+            <summary>
+            广播信息的发送者。可以为UserID或者NetServer.SystemUserID。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.GroupID">
+            <summary>
+            广播信息的接收组的ID。
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.BroadcastType">
+            <summary>
+            广播信息类型
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.Content">
+            <summary>
+            广播信息的内容
+            </summary>
+        </member>
+        <member name="P:ESPlus.Application.BroadcastInformation.Tag">
+            <summary>
+            附加信息。
             </summary>
         </member>
         <member name="T:ESPlus.Application.Group.Server.GroupMessageProcesser">
@@ -3266,7 +3332,9 @@
         </member>
         <member name="T:ESFramework.AuthorizedSNChecker">
             <summary>
-            机器信息（硬盘ID、MAC地址）验证器
+            机器信息（硬盘ID、MAC地址）验证器。
+            结合LimittedSNChecker使用可以进一步验证SN过期时间。
+            当使用有期限的SN时，首先调用AuthorizedSNChecker进行SN验证（AgileTcpListener.authorizedSN），一段时间后，在调用LimittedSNChecker进行过期时间验证！
             </summary>
         </member>
         <member name="M:ESFramework.AuthorizedSNChecker.CheckAuthorizedSN(System.String)">
@@ -4669,7 +4737,7 @@
         </member>
         <member name="P:ESPlus.Advanced.BaseOptions.WriteTimeoutInSecs">
             <summary>
-            写超时。单位：秒。默认值：0。0表示不设定超时。
+            写超时。单位：秒。客户端默认值：60。服务端默认值：0。0表示不设定超时。
             </summary>
         </member>
         <member name="P:ESPlus.Advanced.BaseOptions.SocketSendBuffSize">
@@ -6281,7 +6349,7 @@
         </member>
         <member name="E:ESPlus.Application.P2PSession.Passive.IP2PController.P2PChannelClosed">
             <summary>
-            当某个P2P Channel关闭时，触发此事件。参数为对方的UserID。
+            当某个P2P Channel关闭时，触发此事件。
             </summary>
         </member>
         <member name="E:ESPlus.Application.P2PSession.Passive.IP2PController.AllP2PChannelClosed">

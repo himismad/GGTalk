@@ -248,7 +248,7 @@ namespace GGTalk
                 ++this.sendingCount;
                 this.gifBox_wait.Visible = true;
                 UIResultHandler handler = new UIResultHandler(this, this.HandleSentResult);
-                this.rapidPassiveEngine.ContactsOutter.BroadcastBlob(this.currentGroup.GroupID, BroadcastTypes.BroadcastChat, encrypted, 2048, handler.Create(), null);
+                this.rapidPassiveEngine.ContactsOutter.BroadcastBlob(this.currentGroup.GroupID, BroadcastTypes.BroadcastChat, encrypted, null, 2048, handler.Create(), null );
                
                 this.AppendChatBoxContent(string.Format("{0}({1})", this.mine.Name, this.mine.UserID),null, content, Color.Green);
                 ChatMessageRecord record = new ChatMessageRecord(this.mine.UserID, this.currentGroup.GroupID, buff, true);

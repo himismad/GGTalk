@@ -49,9 +49,7 @@ namespace GGMeeting.Server
 
                 #region OMCS 服务器设置
                 OMCS.GlobalUtil.SetMaxLengthOfUserID(byte.Parse(ConfigurationManager.AppSettings["MaxLengthOfUserID"]));
-                OMCS.OMCSConfiguration config = new OMCS.OMCSConfiguration(
-                    int.Parse(ConfigurationManager.AppSettings["CameraFramerate"]),
-                    int.Parse(ConfigurationManager.AppSettings["DesktopFramerate"]));
+                OMCS.OMCSConfiguration config = new OMCS.OMCSConfiguration();
 
                 //用于验证登录用户的帐密
                 OMCS.Server.DefaultUserVerifier userVerifier = new OMCS.Server.DefaultUserVerifier();

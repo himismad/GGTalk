@@ -14,15 +14,29 @@ using DataRabbit;
 namespace GGTalk.Server
 {  
     /// <summary>
-    /// 真实数据库。
+    /// 真实数据库，支持SqlServer和MySQL，通过构造函数指定数据库类型。
     /// </summary>
     public class RealDB : DefaultChatRecordPersister, IDBPersister
     {
         private TransactionScopeFactory transactionScopeFactory;
 
-        public RealDB(string dbName, string dbIP,string saPwd )
+        /// <summary>
+        /// 该构造函数用于SqlServer数据库。
+        /// </summary>        
+        public RealDB(string sqlServerDBName, string dbIP,string saPwd )
         {
-            DataConfiguration config = new SqlDataConfiguration(dbIP, "sa", saPwd, dbName);
+            DataConfiguration config = new SqlDataConfiguration(dbIP, "sa", saPwd, sqlServerDBName);
+            this.transactionScopeFactory = new TransactionScopeFactory(config);
+            this.transactionScopeFactory.Initialize();
+            base.Initialize(this.transactionScopeFactory);
+        }
+
+        /// <summary>
+        /// 该构造函数用于MySQL数据库。
+        /// </summary>   
+        public RealDB(string mysqlDBName, string dbIP, int dbPort, string rootPwd)
+        {
+            DataConfiguration config = new MysqlDataConfiguration(dbIP, dbPort, "root", rootPwd, mysqlDBName);
             this.transactionScopeFactory = new TransactionScopeFactory(config);
             this.transactionScopeFactory.Initialize();
             base.Initialize(this.transactionScopeFactory);

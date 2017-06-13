@@ -29,8 +29,7 @@ namespace GGMeeting
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            OMCS.Paint.Messages.Passive.WhitBoardDataSendingParas whitBoardDataSendingParas1 = new OMCS.Paint.Messages.Passive.WhitBoardDataSendingParas();
+            this.components = new System.ComponentModel.Container();           
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -225,8 +224,7 @@ namespace GGMeeting
             this.whiteBoardConnector1.BackImageOfPage = null;
             this.whiteBoardConnector1.Cursor = System.Windows.Forms.Cursors.No;
             this.whiteBoardConnector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.whiteBoardConnector1.FocusOnNewViewByOther = true;
-            this.whiteBoardConnector1.KeepSameViewType = true;
+            this.whiteBoardConnector1.FocusOnNewViewByOther = true;            
             this.whiteBoardConnector1.Location = new System.Drawing.Point(3, 3);
             this.whiteBoardConnector1.Name = "whiteBoardConnector1";
             this.whiteBoardConnector1.PageSize = new System.Drawing.Size(800, 600);
@@ -234,10 +232,7 @@ namespace GGMeeting
             this.whiteBoardConnector1.TabIndex = 0;
             this.whiteBoardConnector1.Timeout4LoadContent = 120;
             this.whiteBoardConnector1.WaitOwnerOnlineSpanInSecs = 0;
-            this.whiteBoardConnector1.WatchingOnly = false;
-            whitBoardDataSendingParas1.FragmentSize = 2048;
-            whitBoardDataSendingParas1.SendingSpanInMSecs = 0;
-            this.whiteBoardConnector1.WhitBoardDataSendingParas = whitBoardDataSendingParas1;
+            this.whiteBoardConnector1.WatchingOnly = false;                  
             // 
             // tabPage2
             // 

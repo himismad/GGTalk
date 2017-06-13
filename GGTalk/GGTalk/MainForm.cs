@@ -350,7 +350,7 @@ namespace GGTalk
             this.rapidPassiveEngine.MessageReceived += new CbGeneric<string, int, byte[], string>(rapidPassiveEngine_MessageReceived);
 
             //群、组
-            this.rapidPassiveEngine.ContactsOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[]>(ContactsOutter_BroadcastReceived);
+            this.rapidPassiveEngine.ContactsOutter.BroadcastReceived += new CbGeneric<string, string, int, byte[] ,string>(ContactsOutter_BroadcastReceived);
             this.rapidPassiveEngine.ContactsOutter.ContactsOffline += new CbGeneric<string>(ContactsOutter_ContactsOffline); //所有联系人的下线事件
 
             //网盘访问器 V2.0

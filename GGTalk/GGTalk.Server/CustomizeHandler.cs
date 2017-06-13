@@ -29,7 +29,7 @@ namespace GGTalk.Server
             this.offlineFileController = fileCtr;
 
             this.rapidServerEngine.UserManager.SomeOneDisconnected += new ESBasic.CbGeneric<UserData, ESFramework.Server.DisconnectedType>(UserManager_SomeOneDisconnected);
-            this.rapidServerEngine.ContactsController.BroadcastReceived += new ESBasic.CbGeneric<string, string, int, byte[]>(ContactsController_BroadcastReceived);
+            this.rapidServerEngine.ContactsController.BroadcastReceived += new ESBasic.CbGeneric<string, string, int, byte[] ,string>(ContactsController_BroadcastReceived);
             this.rapidServerEngine.MessageReceived += new ESBasic.CbGeneric<string, int, byte[], string>(rapidServerEngine_MessageReceived);
         }
 
@@ -70,7 +70,7 @@ namespace GGTalk.Server
             }
         }
 
-        void ContactsController_BroadcastReceived(string broadcasterID, string groupID, int broadcastType, byte[] broadcastContent)
+        void ContactsController_BroadcastReceived(string broadcasterID, string groupID, int broadcastType, byte[] broadcastContent ,string tag)
         {
             if (broadcastType == BroadcastTypes.BroadcastChat)
             {
@@ -151,7 +151,7 @@ namespace GGTalk.Server
                 string groupID = System.Text.Encoding.UTF8.GetString(info) ;
                 this.globalCache.QuitGroup(sourceUserID, groupID);
                 //通知其它组成员
-                this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.SomeoneQuitGroup, System.Text.Encoding.UTF8.GetBytes(sourceUserID), ESFramework.ActionTypeOnChannelIsBusy.Continue);
+                this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.SomeoneQuitGroup, System.Text.Encoding.UTF8.GetBytes(sourceUserID),null, ESFramework.ActionTypeOnChannelIsBusy.Continue);
               
                 return;
             }
@@ -160,7 +160,7 @@ namespace GGTalk.Server
             {
                 string groupID = System.Text.Encoding.UTF8.GetString(info);               
                 //通知其它组成员
-                this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.GroupDeleted, System.Text.Encoding.UTF8.GetBytes(sourceUserID), ESFramework.ActionTypeOnChannelIsBusy.Continue);
+                this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.GroupDeleted, System.Text.Encoding.UTF8.GetBytes(sourceUserID),null, ESFramework.ActionTypeOnChannelIsBusy.Continue);
                 this.globalCache.DeleteGroup(groupID);
                 return;
             }
@@ -343,7 +343,7 @@ namespace GGTalk.Server
                 if (res == JoinGroupResult.Succeed)
                 {
                     //通知其它组成员
-                    this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.SomeoneJoinGroup, System.Text.Encoding.UTF8.GetBytes(sourceUserID), ESFramework.ActionTypeOnChannelIsBusy.Continue);
+                    this.rapidServerEngine.ContactsController.Broadcast(groupID, BroadcastTypes.SomeoneJoinGroup, System.Text.Encoding.UTF8.GetBytes(sourceUserID),null, ESFramework.ActionTypeOnChannelIsBusy.Continue);
                 }
                 return BitConverter.GetBytes((int)res);
             }

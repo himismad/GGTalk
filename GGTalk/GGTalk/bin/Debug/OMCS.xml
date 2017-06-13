@@ -7641,6 +7641,98 @@
             客户端设备的类型。
             </summary>
         </member>
+        <member name="T:OMCS.Engine.Video.DesktopCapturer2">
+            <summary>
+            解决原来的DesktopCapturer采集帧频最多10fps的问题，DesktopCapturer2使用Timer多线程采集，可以达到20+fps。
+            2015.12.03
+            </summary>
+        </member>
+        <member name="T:OMCS.Engine.Video.IVideoCapturer">
+            <summary>
+            原始视频采集器。
+            </summary>
+        </member>
+        <member name="M:OMCS.Engine.Video.IVideoCapturer.Start">
+            <summary>
+            开始采集
+            </summary>
+        </member>
+        <member name="M:OMCS.Engine.Video.IVideoCapturer.Stop">
+            <summary>
+            停止采集
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.IVideoCapturer.DataFromOMCS">
+            <summary>
+            采集的数据是否来自OMCS的DynamicCameraConnector 的 FrameEncodedReceived 事件。一般返回false即可。
+            （比如，在部署相互关联的多套OMCS服务器时，可在桥接器上使用。注意，若启用该属性，则在连接自己测试时，要将IMultimediaManager.Advanced.UseOriginImage4Myself设置为false。）
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.IVideoCapturer.MaxWaitFrameCount">
+            <summary>
+            当等待发送的帧的个数大于等于该值时，则丢弃接下来的采集帧。
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.IVideoCapturer.VideoSize">
+            <summary>
+            要采集的视频大小（分辨率）,宽和高都必须是8的整数倍。
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.IVideoCapturer.FrameRate">
+            <summary>
+            真实采集的帧频
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.IVideoCapturer.IsCapturing">
+            <summary>
+            是否正在采集？
+            </summary>
+        </member>
+        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoCaptured">
+            <summary>
+            当采集完一帧时，触发此事件。事件参数为图像数据。
+            </summary>
+        </member>
+        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoError">
+            <summary>
+            当采集发生错误时，触发此事件。
+            </summary>
+        </member>
+        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoSizeChanged">
+            <summary>
+            当采集的分辨率发生变化时，触发此事件。
+            </summary>
+        </member>
+        <member name="M:OMCS.Engine.Video.IDesktopCapturer.ChangeCaptureRegion(System.Nullable{System.Drawing.Rectangle})">
+            <summary>
+            动态修改捕捉区域。
+            </summary>        
+        </member>
+        <member name="P:OMCS.Engine.Video.IDesktopCapturer.CaptureRegion">
+            <summary>
+            实际捕捉的区域。
+            </summary>
+        </member>
+        <member name="P:OMCS.Engine.Video.DesktopCapturer2.CaptureRegion">
+            <summary>
+            实际捕捉的区域。
+            </summary>
+        </member>
+        <member name="E:OMCS.Engine.Video.DesktopCapturer2.VideoCaptured">
+            <summary>
+            当采集到一帧图像时，触发该事件。
+            </summary>
+        </member>
+        <member name="E:OMCS.Engine.Video.DesktopCapturer2.CaptureError">
+            <summary>
+            如果采集的过程中发生错误，将触发此事件。
+            </summary>
+        </member>
+        <member name="T:OMCS.Engine.Video.ScreenCapture2">
+            <summary>
+            在win2003下面，无法截悬浮窗等LayeredWindow
+            </summary>
+        </member>
         <member name="T:OMCS.Engine.Soundcard.Gsm610WaveFormat">
             <summary>
             GSM 610
@@ -8213,6 +8305,7 @@
         <member name="T:OMCS.Passive.MultiChat.IChatGroupEntrance">
             <summary>
             多人语音/视频聊天组入口。
+            注意：如果客户端掉线，将自动从所有聊天组中退出。
             </summary>
         </member>
         <member name="M:OMCS.Passive.MultiChat.IChatGroupEntrance.Join(OMCS.Contracts.ChatType,System.String)">
@@ -8277,62 +8370,6 @@
         <member name="F:OMCS.Passive.ShortMessages.ShortMessageMode.AudioAndVideo">
             <summary>
             采集语音和视频
-            </summary>
-        </member>
-        <member name="T:OMCS.Engine.Video.IVideoCapturer">
-            <summary>
-            原始视频采集器。
-            </summary>
-        </member>
-        <member name="M:OMCS.Engine.Video.IVideoCapturer.Start">
-            <summary>
-            开始采集
-            </summary>
-        </member>
-        <member name="M:OMCS.Engine.Video.IVideoCapturer.Stop">
-            <summary>
-            停止采集
-            </summary>
-        </member>
-        <member name="P:OMCS.Engine.Video.IVideoCapturer.DataFromOMCS">
-            <summary>
-            采集的数据是否来自OMCS的DynamicCameraConnector 的 FrameEncodedReceived 事件。一般返回false即可。
-            （比如，在部署相互关联的多套OMCS服务器时，可在桥接器上使用。注意，若启用该属性，则在连接自己测试时，要将IMultimediaManager.Advanced.UseOriginImage4Myself设置为false。）
-            </summary>
-        </member>
-        <member name="P:OMCS.Engine.Video.IVideoCapturer.MaxWaitFrameCount">
-            <summary>
-            当等待发送的帧的个数大于等于该值时，则丢弃接下来的采集帧。
-            </summary>
-        </member>
-        <member name="P:OMCS.Engine.Video.IVideoCapturer.VideoSize">
-            <summary>
-            要采集的视频大小（分辨率）,宽和高都必须是8的整数倍。
-            </summary>
-        </member>
-        <member name="P:OMCS.Engine.Video.IVideoCapturer.FrameRate">
-            <summary>
-            真实采集的帧频
-            </summary>
-        </member>
-        <member name="P:OMCS.Engine.Video.IVideoCapturer.IsCapturing">
-            <summary>
-            是否正在采集？
-            </summary>
-        </member>
-        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoCaptured">
-            <summary>
-            当采集完一帧时，触发此事件。事件参数为图像数据。
-            </summary>
-        </member>
-        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoError">
-            <summary>
-            当采集发生错误时，触发此事件。
-            </summary>
-        </member>
-        <member name="E:OMCS.Engine.Video.IVideoCapturer.VideoSizeChanged">
-            <summary>
-            当采集的分辨率发生变化时，触发此事件。
             </summary>
         </member>
         <member name="T:OMCS.Communication.Plus.FileTransceiver.DirectoryReceiver">
@@ -8660,86 +8697,6 @@
             <param name="response">回复消息</param>
             <param name="state">状态数据</param>
         </member>
-        <member name="F:OMCS.Communication.Basic.PasswordLevel.Administrator">
-            <summary>
-            管理密码 0 
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.PasswordLevel.NormalUser">
-            <summary>
-            普通用户密码 1
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.PasswordLevel.AuthenticUser">
-            <summary>
-            认证密码 2
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.SUCCESS">
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.OPEN_DEVICE_FAILED">
-            <summary>
-            打开设备失败 1
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.FIND_DEVICE_FAILED">
-            <summary>
-            未找到符合条件的设备 2
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.INVALID_PARAMETER">
-            <summary>
-            参数错误 3
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.INVALID_BLOCK_NUMBER">
-            <summary>
-            块号错误 4
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.HARDWARE_COMMUNICATE_ERROR">
-            <summary>
-            与硬件通信错误 5
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.INVALID_PASSWORD">
-            <summary>
-            密码错误 6
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.ACCESS_DENIED">
-            <summary>
-            没有权限 7
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.ALREADY_OPENED">
-            <summary>
-            设备已经打开 8
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.ALLOCATE_MEMORY_FAILED">
-            <summary>
-            内存分配失败 9
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.INVALID_UPDATE_PACKAGE">
-            <summary>
-            不合法的升级包 10
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.SYN_ERROR">
-            <summary>
-            线程同步错误 11
-            </summary>
-        </member>
-        <member name="F:OMCS.Communication.Basic.ResultCode.OTHER_ERROR">
-            <summary>
-            其它未知异常、错误 12
-            </summary>
-        </member>
         <member name="T:OMCS.Communication.Basic.AuthorizationVerifier">
             <summary>
             OMCS授权验证。
@@ -8875,6 +8832,16 @@
             TriangleEditor 三角形编辑器。
             zhuweisky 2010.03.30
             </summary>
+        </member>
+        <member name="M:OMCS.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
+        </member>
+        <member name="M:OMCS.RemoteDogChecker.ReceiveData(System.Net.Sockets.NetworkStream,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            ReceiveData 从网络读取指定长度的数据 ，存放在buff中offset处。当读取的字节数为0时，表示连接断开，并抛出IOException异常。
+            </summary>	
         </member>
         <member name="T:OMCS.Passive.ConnectorDisconnectedType">
             <summary>
@@ -9969,6 +9936,86 @@
             当同步完成时，触发该事件【UI线程】。参数:Download - succeed
             </summary>
         </member>
+        <member name="F:OMCS.PasswordLevel.Administrator">
+            <summary>
+            管理密码 0 
+            </summary>
+        </member>
+        <member name="F:OMCS.PasswordLevel.NormalUser">
+            <summary>
+            普通用户密码 1
+            </summary>
+        </member>
+        <member name="F:OMCS.PasswordLevel.AuthenticUser">
+            <summary>
+            认证密码 2
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.SUCCESS">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.OPEN_DEVICE_FAILED">
+            <summary>
+            打开设备失败 1
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.FIND_DEVICE_FAILED">
+            <summary>
+            未找到符合条件的设备 2
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.INVALID_PARAMETER">
+            <summary>
+            参数错误 3
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.INVALID_BLOCK_NUMBER">
+            <summary>
+            块号错误 4
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.HARDWARE_COMMUNICATE_ERROR">
+            <summary>
+            与硬件通信错误 5
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.INVALID_PASSWORD">
+            <summary>
+            密码错误 6
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.ACCESS_DENIED">
+            <summary>
+            没有权限 7
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.ALREADY_OPENED">
+            <summary>
+            设备已经打开 8
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.ALLOCATE_MEMORY_FAILED">
+            <summary>
+            内存分配失败 9
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.INVALID_UPDATE_PACKAGE">
+            <summary>
+            不合法的升级包 10
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.SYN_ERROR">
+            <summary>
+            线程同步错误 11
+            </summary>
+        </member>
+        <member name="F:OMCS.ResultCode.OTHER_ERROR">
+            <summary>
+            其它未知异常、错误 12
+            </summary>
+        </member>
         <member name="T:OMCS.Engine.DShow.Core.ISampleGrabber">
             <summary>
             The interface is exposed by the Sample Grabber Filter. It enables an application to retrieve
@@ -10201,6 +10248,11 @@
         <member name="P:OMCS.Contracts.OMCSInfoTypes.AudioFrameData">
             <summary>
             音频帧数据。owner->guest。
+            </summary>
+        </member>
+        <member name="P:OMCS.Contracts.OMCSInfoTypes.GetChatGroupMembers">
+            <summary>
+            请求加入聊天组。
             </summary>
         </member>
         <member name="P:OMCS.Contracts.OMCSInfoTypes.RequestJoinChatGroup">
@@ -10856,7 +10908,7 @@
         </member>
         <member name="F:OMCS.Passive.ConnectResult.ChannelUnavailable">
             <summary>
-            通道不可用（当前客户端与OMCS之间的TCP连接断开了）
+            通道不可用（当前客户端与OMCS之间的TCP连接断开了，或者TCP连接尚未建立）
             </summary>
         </member>
         <member name="F:OMCS.Passive.ConnectResult.CantConnectRepeatly">
@@ -11383,6 +11435,11 @@
             桌面视频码率控制策略。默认值为BitrateControlType.CQP。【在VideoQualityEnhanced属性为true时，该设置才有效。】
             </summary>
         </member>
+        <member name="P:OMCS.Passive.AdvancedOptions.RecheckMembersOfChatGroup">
+            <summary>
+            是否复查聊天组（MultiChat）成员。默认值：true。
+            </summary>
+        </member>
         <member name="T:OMCS.Passive.BitrateControlType">
             <summary>
             视频码率控制策略。
@@ -11782,11 +11839,10 @@
             <param name="extendName">全小写的扩展名。如“.docx”，“.pdf”等</param>
             <returns>如果不支持对应的文件类型，则返回null。</returns>
         </member>
-        <member name="M:OMCS.Engine.WhiteBoard.IImageConverterFactory.Support(System.String)">
+        <member name="M:OMCS.Engine.WhiteBoard.IImageConverterFactory.GetSupportedFileTypes">
             <summary>
-            是否支持目标类型的文档。
-            </summary>
-            <param name="extendName">全小写的扩展名。如“.docx”，“.pdf”等</param>       
+            获取所有支持的文档类型。返回的集合中的元素为全小写的扩展名。如“.docx”，“.pdf”等。
+            </summary>       
         </member>
         <member name="P:OMCS.Passive.ShortMessages.ShortMessageController.ShortMessageMode">
             <summary>

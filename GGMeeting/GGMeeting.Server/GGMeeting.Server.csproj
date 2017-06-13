@@ -46,10 +46,6 @@
     <Reference Include="OMCS">
       <HintPath>..\Dlls\OMCS.dll</HintPath>
     </Reference>
-    <Reference Include="PaintFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ba1538489f75683e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dlls\PaintFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />

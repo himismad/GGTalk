@@ -294,7 +294,7 @@ namespace GGTalk
         #endregion
 
         #region SoftwareName
-        private static string softwareName = "傲瑞通";
+        private static string softwareName = "GGTalk";
         public static string SoftwareName
         {
             get { return GlobalResourceManager.softwareName; }

@@ -1,0 +1,9 @@
+
+2015/6/25 13:57:33 : 高 －－ 由于目标计算机积极拒绝，无法连接。 127.0.0.1:4538 [:]    在 RtM2MtRcC7LqEQQQ1a7.CVaTk9RGbQwY8Ic9vO6.w28R16f398()
+   在 o3VdY8RKFYuignqaXoA.oLJWX2RU8gXmVSV5O68.UEt5Wx2lLb1RfX7yu5i(Object )
+   在 o3VdY8RKFYuignqaXoA.oLJWX2RU8gXmVSV5O68.Initialize()
+   在 rnwduVAfqYwYqZrY5Dq.SWVbWmA37eHOdKDBwR8.GiTeVikq89y5EAUQoVR(Object )
+   在 rnwduVAfqYwYqZrY5Dq.SWVbWmA37eHOdKDBwR8.Initialize(String  , String  , String  , Int32  , ICustomizeHandler  )
+   在 GGMeeting.LoginForm.Login(Boolean isVisitor) 位置 D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting\LoginForm.cs:行号 174
+   在 GGMeeting.LoginForm.button1_Click(Object sender, EventArgs e) 位置 D:\0.oraycn\2.ProductDemo\0.Project\GGMeeting\GGMeeting\LoginForm.cs:行号 95 。错误类型:System.Net.Sockets.SocketException。位置：LoginForm.button1_Click游客登录的处理
+

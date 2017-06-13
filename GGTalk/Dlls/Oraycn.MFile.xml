@@ -166,21 +166,6 @@
             当后台写线程发生错误时，触发此事件，并结束写线程。事件参数为错误信息。
             </summary>
         </member>
-        <member name="M:Oraycn.MFile.AuthorizeVerifier.VerifyAuthorizedUser(System.String,System.String)">
-            <summary>
-            验证授权用户帐号密码。在正式使用MFile组件之前调用。通过验证后，MFile组件将由试用版转变为正式版。
-            </summary>        
-        </member>
-        <member name="F:Oraycn.MFile.AuthorizationVerifyMode.UserID">
-            <summary>
-            用于按实例授权。
-            </summary>
-        </member>
-        <member name="F:Oraycn.MFile.AuthorizationVerifyMode.PublicTokenKey">
-            <summary>
-            用于买断的情况。
-            </summary>
-        </member>
         <member name="T:Oraycn.MFile.BaseMaker">
             <summary>
             媒体文件生成器的基类。
@@ -210,6 +195,21 @@
         <member name="E:Oraycn.MFile.BaseMaker.WriteErrorOccured">
             <summary>
             当后台写线程发生错误时，触发此事件，并结束写线程。事件参数为错误信息。
+            </summary>
+        </member>
+        <member name="M:Oraycn.MFile.AuthorizeVerifier.VerifyAuthorizedUser(System.String,System.String)">
+            <summary>
+            验证授权用户帐号密码。在正式使用MFile组件之前调用。通过验证后，MFile组件将由试用版转变为正式版。
+            </summary>        
+        </member>
+        <member name="F:Oraycn.MFile.AuthorizationVerifyMode.UserID">
+            <summary>
+            用于按实例授权。
+            </summary>
+        </member>
+        <member name="F:Oraycn.MFile.AuthorizationVerifyMode.PublicTokenKey">
+            <summary>
+            用于买断的情况。
             </summary>
         </member>
         <member name="T:Oraycn.MFile.SilenceVideoFileMaker">

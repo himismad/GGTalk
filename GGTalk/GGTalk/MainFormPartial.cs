@@ -182,7 +182,7 @@ namespace GGTalk
             return InformationTypes.ContainsInformationType(informationType);
         }
 
-        void ContactsOutter_BroadcastReceived(string broadcasterID, string groupID, int broadcastType, byte[] content)
+        void ContactsOutter_BroadcastReceived(string broadcasterID, string groupID, int broadcastType, byte[] content ,string tag)
         {
             if (!this.initialized)
             {
@@ -191,7 +191,7 @@ namespace GGTalk
 
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(new CbGeneric<string, string, int, byte[]>(this.ContactsOutter_BroadcastReceived), broadcasterID, groupID, broadcastType, content);
+                this.BeginInvoke(new CbGeneric<string, string, int, byte[] ,string>(this.ContactsOutter_BroadcastReceived), broadcasterID, groupID, broadcastType, content, tag);
             }
             else
             {

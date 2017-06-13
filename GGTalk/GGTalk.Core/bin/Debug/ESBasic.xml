@@ -1288,6 +1288,11 @@
             OpenUrl 在浏览器中打开wsUrl链接
             </summary>        
         </member>
+        <member name="T:ESBasic.ObjectManagement.ReorderCache`1">
+            <summary>
+            用于重整对象的顺序。
+            </summary>    
+        </member>
         <member name="T:ESBasic.Security.DesEncryption">
             <summary>
             DES加密算法。可以直接使用其静态方法进行3DES加/解密。
@@ -1981,6 +1986,11 @@
             ParseEnumValue 与ConvertEnumToList结合使用，将ComoboBox等控件中选中的string转换为枚举值
             </summary>       
         </member>
+        <member name="T:ESBasic.ObjectManagement.SafeQueue`1">
+            <summary>
+            线程安全的Queue。
+            </summary>
+        </member>
         <member name="T:ESBasic.Geometry.Triangle">
             <summary>
             Triangle 几何三角形。
@@ -2192,6 +2202,11 @@
             <summary>
             MaxHistoryCountInMemory 保存在内存中的最大的History个数。
             </summary>
+        </member>
+        <member name="M:ESBasic.ObjectManagement.Managers.SafeDictionary`2.GetAllReadonly">
+            <summary>
+            返回的列表不能被修改。【使用缓存】
+            </summary>  
         </member>
         <member name="T:ESBasic.Arithmetic.Sorting.HeapSorter`1">
             <summary>
@@ -2410,6 +2425,42 @@
         <member name="E:ESBasic.Threading.Engines.ISequentialEngine.EngineDisruptted">
             <summary>
             EngineDisruptted 引擎任务被中断，事件参数说明中断原因
+            </summary>
+        </member>
+        <member name="T:ESBasic.Threading.Engines.RetryEngine`1">
+            <summary>
+            任务重试引擎，直至任务执行完成。如果某任务执行失败（方法调用抛出任何异常），将在延迟一段时间后重试，如此循环，直到成功为止。
+            </summary>
+        </member>
+        <member name="M:ESBasic.Threading.Engines.RetryEngine`1.Initialize(ESBasic.Func{`0,System.Boolean})">
+            <summary>
+            初始化引擎。
+            </summary>
+            <param name="targetAction">执行任务的函数。函数执行返回false或者抛出异常，说明任务执行失败，目标任务将被重试</param>
+        </member>
+        <member name="E:ESBasic.Threading.Engines.RetryEngine`1.TaskFailed">
+            <summary>
+            当某个任务执行（或重试）失败时，触发该事件。
+            </summary>
+        </member>
+        <member name="E:ESBasic.Threading.Engines.RetryEngine`1.TaskSucceed">
+            <summary>
+            当某个任务执行（或重试）成功时，触发该事件。参数：Task - 加入时间 - 重试次数
+            </summary>
+        </member>
+        <member name="P:ESBasic.Threading.Engines.RetryEngine`1.TaskToActionCount">
+            <summary>
+            尚未被第一次执行的任务数。
+            </summary>
+        </member>
+        <member name="P:ESBasic.Threading.Engines.RetryEngine`1.TaskToRetryCount">
+            <summary>
+            等待重试的任务数。
+            </summary>
+        </member>
+        <member name="P:ESBasic.Threading.Engines.RetryEngine`1.RetryingCount">
+            <summary>
+            正在重试的任务数。
             </summary>
         </member>
         <member name="T:ESBasic.Threading.Engines.AgileCycleEngine">
@@ -2817,6 +2868,11 @@
         <member name="M:ESBasic.Serialization.AgileConfiguration.Save(System.String)">
             <summary>
             Save 将配置保存到xml文件
+            </summary>   
+        </member>
+        <member name="T:ESBasic.ObjectManagement.SafeList`1">
+            <summary>
+            线程安全的List。
             </summary>   
         </member>
         <member name="T:ESBasic.Emit.DynamicProxy.MethodTimeInterceptor">
@@ -4087,11 +4143,6 @@
             <summary>
             当模型是值对象，返回value
             </summary>
-        </member>
-        <member name="T:ESBasic.ObjectManagement.ReorderCache`1">
-            <summary>
-            用于重整对象的顺序。
-            </summary>    
         </member>
     </members>
 </doc>

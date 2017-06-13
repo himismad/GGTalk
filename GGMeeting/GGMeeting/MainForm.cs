@@ -23,6 +23,7 @@ using ESPlus.Application.Group;
 using System.Net;
 using ESFramework.Boost.DynamicGroup.Passive;
 using ESFramework.Boost.Controls;
+using OMCS.Boost;
 
 namespace GGMeeting
 {
@@ -512,7 +513,7 @@ namespace GGMeeting
             this.gotoClose = true;
             this.multiVideoChatContainer1.Close();          
             this.multimediaManager.DisconnectGuest(false);
-            this.multimediaManager.Dispose();
+            //this.multimediaManager.Dispose();
             this.rapidPassiveEngine.Close();
         }
         #endregion 

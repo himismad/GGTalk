@@ -40,9 +40,6 @@
     <Reference Include="OMCS">
       <HintPath>..\Dlls\OMCS.dll</HintPath>
     </Reference>
-    <Reference Include="PaintFramework">
-      <HintPath>..\Dlls\PaintFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -81,6 +78,7 @@
     <Compile Include="MultiChat\SpeakerVideoPanel.Designer.cs">
       <DependentUpon>SpeakerVideoPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="MultimediaManagerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
