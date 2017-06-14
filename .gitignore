@@ -2,6 +2,12 @@
 Thumbs.db
 ehthumbs.db
 
+
+/GGTalk/GGTalk.Server/bin
+/GGTalk/GGTalk/bin
+/GGTalk/GGTalk.Core/bin
+/GGTalk/JustLib/bin
+
 # Folder config file
 Desktop.ini
 
