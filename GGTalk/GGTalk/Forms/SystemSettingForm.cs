@@ -18,6 +18,9 @@ using System.Diagnostics;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 系统设置窗口。
+    /// </summary>
     public partial class SystemSettingForm : BaseForm
     {
         public SystemSettingForm()

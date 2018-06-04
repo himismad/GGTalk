@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 编辑好友分组名称的窗口。
+    /// </summary>
     public partial class EditCatelogNameForm : BaseForm
     {
         private bool isNew = true;

@@ -8,6 +8,9 @@ using System.Drawing;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 让目标Form自动停靠在桌面边缘。
+    /// </summary>
     public partial class AutoDocker : Component
     {       
         private Form dockedForm;

@@ -9,7 +9,7 @@ using ESPlus.Serialization;
 using System.Runtime.InteropServices;
 using OMCS.Passive;
 using JustLib;
-using JustLib.Controls;
+using GGTalk.Controls;
 using JustLib.Records;
 
 

@@ -5,7 +5,6 @@ using System.Drawing;
 using ESBasic.Helpers;
 using ESBasic;
 using JustLib;
-using JustLib.Controls;
 using DataRabbit.DBAccessing;
 
 namespace GGTalk
@@ -971,5 +970,120 @@ namespace GGTalk
         #endregion
 
     } 
+    #endregion
+
+    #region ChatBoxContent
+    [Serializable]
+    public class ChatBoxContent
+    {
+        public ChatBoxContent() { }
+        public ChatBoxContent(string _text, Font _font, Color c)
+        {
+            this.text = _text;
+            this.font = _font;
+            this.color = c;
+        }
+
+        #region Text
+        private string text = "";
+        /// <summary>
+        /// 纯文本信息
+        /// </summary>
+        public string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+        #endregion
+
+        #region Font
+        private Font font;
+        public Font Font
+        {
+            get { return font; }
+            set { font = value; }
+        }
+        #endregion
+
+        #region Color
+        private Color color;
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+        #endregion
+
+        #region ForeignImageDictionary
+        private Dictionary<uint, Image> foreignImageDictionary = new Dictionary<uint, Image>();
+        /// <summary>
+        /// 非内置的表情图片。key - 在ChatBox中的位置。
+        /// </summary>
+        public Dictionary<uint, Image> ForeignImageDictionary
+        {
+            get { return foreignImageDictionary; }
+            set { foreignImageDictionary = value; }
+        }
+        #endregion
+
+        #region EmotionDictionary
+        private Dictionary<uint, uint> emotionDictionary = new Dictionary<uint, uint>();
+        /// <summary>
+        /// 内置的表情图片。key - 在ChatBox中的位置 ，value - 表情图片在内置列表中的index。
+        /// </summary>
+        public Dictionary<uint, uint> EmotionDictionary
+        {
+            get { return emotionDictionary; }
+            set { emotionDictionary = value; }
+        }
+        #endregion
+
+        #region PicturePositions
+        private List<uint> picturePositions = new List<uint>();
+        /// <summary>
+        /// 所有图片的位置。从小到大排列。
+        /// </summary>
+        public List<uint> PicturePositions
+        {
+            get { return picturePositions; }
+            set { picturePositions = value; }
+        }
+        #endregion
+
+        public bool IsEmpty()
+        {
+            return string.IsNullOrEmpty(this.text) && (this.foreignImageDictionary == null || this.foreignImageDictionary.Count == 0) && (this.emotionDictionary == null || this.emotionDictionary.Count == 0);
+        }
+
+        public bool ContainsForeignImage()
+        {
+            return this.foreignImageDictionary != null && this.foreignImageDictionary.Count > 0;
+        }
+
+        public void AddForeignImage(uint pos, Image img)
+        {
+            this.foreignImageDictionary.Add(pos, img);
+        }
+
+        public void AddEmotion(uint pos, uint emotionIndex)
+        {
+            this.emotionDictionary.Add(pos, emotionIndex);
+        }
+
+        public string GetTextWithPicPlaceholder(string placeholder)
+        {
+            if (this.picturePositions == null || this.picturePositions.Count == 0)
+            {
+                return this.Text;
+            }
+
+            string tmp = this.Text;
+            for (int i = this.picturePositions.Count - 1; i >= 0; i--)
+            {
+                tmp = tmp.Insert((int)this.picturePositions[i], placeholder);
+            }
+            return tmp;
+        }
+    }
     #endregion
 }

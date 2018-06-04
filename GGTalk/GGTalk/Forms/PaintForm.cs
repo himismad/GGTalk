@@ -10,6 +10,9 @@ using CCWin;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 手写板 窗口。
+    /// </summary>
     public partial class PaintForm : BaseForm
     {
         private Color currentColor = Color.Red;

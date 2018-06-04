@@ -7,7 +7,11 @@ using JustLib.Records;
 namespace GGTalk
 {
     /// <summary>
-    /// 用于提供注册服务的Remoting接口。
+    /// 服务端要发布的Remoting服务的接口，供客户端调用。提供如下功能：
+    /// （1）注册用户。
+    /// （2）查询用户。
+    /// （3）发送系统通知。
+    /// （4）查询聊天记录。
     /// </summary>
     public interface IRemotingService :IChatRecordPersister
     {

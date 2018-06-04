@@ -15,6 +15,9 @@ using Microsoft.Win32;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// GGTalk中所有Form的基类。使其拥有一致的皮肤和Icon。
+    /// </summary>
     public partial class BaseForm : CCSkinMain
     {
         public BaseForm()

@@ -12,6 +12,9 @@ using JustLib;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 显示个人资料的窗口。
+    /// </summary>
     public partial class UserInformationForm : BaseForm ,IUserInformationForm
     {
         private Point pt;
@@ -21,7 +24,7 @@ namespace GGTalk
             InitializeComponent();            
         }
 
-        public void SetUser(IUser user)
+        public void SetUser(GGUser user)
         {
             this.lblQm.Text = user.Signature;
             this.skinLabel_id.Text = user.ID;

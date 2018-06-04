@@ -5,6 +5,9 @@ using JustLib.Records;
 
 namespace GGTalk.Server
 {
+    /// <summary>
+    /// 数据库持久化器接口。
+    /// </summary>
     public interface IDBPersister : IChatRecordPersister
     {
         void InsertUser(GGUser t);

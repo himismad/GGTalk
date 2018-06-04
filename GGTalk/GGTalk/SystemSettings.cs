@@ -13,7 +13,7 @@ namespace GGTalk
     [Serializable]
     public class SystemSettings
     {
-        public static string SystemSettingsDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\GGTalk5.0\\" ;
+        public static string SystemSettingsDir = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\GGTalk5.5\\" ;
         private static string SystemSettingsFilePath = SystemSettingsDir + "SystemSettings.dat";
 
         private static SystemSettings singleton;

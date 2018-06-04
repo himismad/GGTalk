@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using ESPlus.Rapid;
 using ESBasic;
-
 using JustLib.Records;
 
 namespace GGTalk.Server
 {
+    /// <summary>
+    /// 服务端发布的Remoting服务，供客户端调用。提供如下功能：
+    /// （1）注册用户。
+    /// （2）查询用户。
+    /// （3）发送系统通知。
+    /// （4）查询聊天记录。
+    /// </summary>
     internal class RemotingService :MarshalByRefObject, IRemotingService
     {
         private GlobalCache globalCache;

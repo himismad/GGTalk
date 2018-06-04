@@ -11,6 +11,9 @@ using JustLib.Records;
 
 namespace GGTalk.Server
 {   
+    /// <summary>
+    /// 服务端全局 用户/群组/离线消息/离线文件 缓存。
+    /// </summary>
     internal class GlobalCache 
     {
         private IDBPersister dbPersister ;

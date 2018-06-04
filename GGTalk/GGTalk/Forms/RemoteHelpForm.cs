@@ -15,6 +15,9 @@ using ESPlus.Application.FileTransfering.Passive;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 远程桌面/远程协助 窗口。
+    /// </summary>
     public partial class RemoteHelpForm : BaseForm
     {
         private RemoteHelpStyle remoteDesktopStyle = RemoteHelpStyle.PartScreen;

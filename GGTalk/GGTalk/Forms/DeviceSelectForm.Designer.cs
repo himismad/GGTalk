@@ -44,7 +44,7 @@
             this.cameraConnector1 = new OMCS.Passive.Video.CameraConnector();
             this.microphoneConnector1 = new OMCS.Passive.Audio.MicrophoneConnector(this.components);
             this.label_info = new System.Windows.Forms.Label();
-            this.decibelDisplayer1 = new JustLib.Controls.DecibelDisplayer();
+            this.decibelDisplayer1 = new GGTalk.Controls.DecibelDisplayer();
             this.SuspendLayout();
             // 
             // comboBox_speaker
@@ -251,7 +251,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_refresh;
         private System.Windows.Forms.Label label_info;
-        private JustLib.Controls.DecibelDisplayer decibelDisplayer1;
+        private GGTalk.Controls.DecibelDisplayer decibelDisplayer1;
     }
 }
 

@@ -9,6 +9,9 @@ using ESBasic;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 显示远程磁盘请求的窗口。
+    /// </summary>
     public partial class DiskRequestPanel : UserControl
     {
         /// <summary>

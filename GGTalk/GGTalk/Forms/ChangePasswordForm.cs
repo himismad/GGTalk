@@ -16,6 +16,9 @@ using ESPlus.Serialization;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 修改密码。
+    /// </summary>
     public partial class ChangePasswordForm : BaseForm
     {       
         private IRapidPassiveEngine rapidPassiveEngine;

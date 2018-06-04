@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GGTalk.Server
 {
+    /// <summary>
+    /// 联系人/群组管理器。
+    /// </summary>
     internal class ContactsManager : ESPlus.Application.Contacts.Server.IContactsManager
     {
         private GlobalCache globalCache;

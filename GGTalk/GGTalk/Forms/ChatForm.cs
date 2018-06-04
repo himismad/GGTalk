@@ -18,13 +18,12 @@ using ESPlus.Application.P2PSession.Passive;
 using ESPlus.FileTransceiver;
 using ESBasic;
 using OMCS.Passive;
-
 using ESBasic.Helpers;
 using ESPlus.Serialization;
 using JustLib;
 using GGTalk.Core;
 using ESPlus.Application;
-using JustLib.Controls;
+using GGTalk.Controls;
 using JustLib.Records;
 using JustLib.NetworkDisk.Passive;
 using JustLib.NetworkDisk;
@@ -32,6 +31,9 @@ using JustLib.NetworkDisk;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 与好友进行聊天的窗口。
+    /// </summary>
     public partial class ChatForm : BaseForm, IManagedForm<string>, IChatForm
     {
         private Font messageFont = new Font("微软雅黑", 9);

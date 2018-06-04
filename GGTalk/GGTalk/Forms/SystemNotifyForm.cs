@@ -13,6 +13,9 @@ using System.Diagnostics;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 系统通知显示窗口。
+    /// </summary>
     public partial class SystemNotifyForm : BaseForm
     {
         public SystemNotifyForm(string title, string content)

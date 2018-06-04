@@ -10,7 +10,7 @@ using JustLib.Records;
 namespace GGTalk.Server
 {
     /// <summary>
-    /// 虚拟数据库。
+    /// 虚拟数据库，在内存中模拟。
     /// </summary>
     public class VirtualDB : IDBPersister
     {

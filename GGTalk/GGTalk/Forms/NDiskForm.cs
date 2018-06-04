@@ -16,6 +16,9 @@ using JustLib.NetworkDisk.Passive;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 网盘/远程磁盘 窗口。
+    /// </summary>
     public partial class NDiskForm : BaseForm
     {        
         public NDiskForm(string ownerID,string nickName, IFileOutter fileOutter , INDiskOutter diskOutter)

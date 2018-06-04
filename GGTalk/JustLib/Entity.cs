@@ -54,17 +54,7 @@ namespace JustLib
         void RemoveMember(string userID);
 
     }
-    #endregion
-
-    public interface IHeadImageGetter
-    {
-        Image GetHeadImage(IUser user);
-    }
-
-    public interface IUserInformationForm
-    {
-        void SetUser(IUser user);
-    }
+    #endregion   
 
     //在线状态
     public enum UserStatus

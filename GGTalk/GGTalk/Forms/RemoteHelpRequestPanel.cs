@@ -9,6 +9,9 @@ using ESBasic;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 远程协助 请求面板。
+    /// </summary>
     public partial class RemoteHelpRequestPanel : UserControl
     {
        

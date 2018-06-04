@@ -25,12 +25,15 @@ using ESPlus.Serialization;
 using GGTalk.Core;
 using ESBasic.Helpers;
 using JustLib;
-using JustLib.UnitViews;
+using GGTalk.UnitViews;
 using JustLib.NetworkDisk.Passive;
 using JustLib.NetworkDisk;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 客户端主窗口。
+    /// </summary>
     public partial class MainForm : BaseForm, IChatSupporter, ITwinkleNotifySupporter, IHeadImageGetter
     {
         private bool initialized = false;       
@@ -60,9 +63,9 @@ namespace GGTalk
 
             this.friendListBox1.AddCatalogClicked += new CbGeneric(friendListBox1_AddCatalogClicked);
             this.friendListBox1.ChangeCatalogNameClicked += new CbGeneric<string>(friendListBox1_ChangeCatalogNameClicked);
-            this.friendListBox1.UserDoubleClicked +=new CbGeneric<IUser>(friendListBox1_UserDoubleClicked);
-            this.friendListBox1.RemoveUserClicked += new CbGeneric<IUser>(friendListBox1_RemoveUserClicked);
-            this.friendListBox1.ChatRecordClicked += new CbGeneric<IUser>(friendListBox1_ChatRecordClicked);
+            this.friendListBox1.UserDoubleClicked +=new CbGeneric<GGUser>(friendListBox1_UserDoubleClicked);
+            this.friendListBox1.RemoveUserClicked += new CbGeneric<GGUser>(friendListBox1_RemoveUserClicked);
+            this.friendListBox1.ChatRecordClicked += new CbGeneric<GGUser>(friendListBox1_ChatRecordClicked);
             this.friendListBox1.CatalogAdded += new CbGeneric<string>(friendListBox1_CatalogAdded);
             this.friendListBox1.CatalogNameChanged += new CbGeneric<string, string, bool>(friendListBox1_CatalogNameChanged);
             this.friendListBox1.CatalogRemoved += new CbGeneric<string>(friendListBox1_CatalogRemoved);
@@ -236,20 +239,20 @@ namespace GGTalk
             this.rapidPassiveEngine.CustomizeOutter.Send(InformationTypes.AddFriendCatalog, System.Text.Encoding.UTF8.GetBytes(catalog));
         }
 
-        void friendListBox1_ChatRecordClicked(IUser friend)
+        void friendListBox1_ChatRecordClicked(GGUser friend)
         {
             ChatRecordForm form = new ChatRecordForm(GlobalResourceManager.RemotingService, GlobalResourceManager.ChatMessageRecordPersister, this.globalUserCache.CurrentUser.GetIDName(), friend.GetIDName());
             form.Show();
         }
 
-        void friendListBox1_UserDoubleClicked(IUser friend)
+        void friendListBox1_UserDoubleClicked(GGUser friend)
         {
             Form form = this.GetChatForm(friend.ID);
             form.Show();
             form.Focus();
         }
 
-        void friendListBox1_RemoveUserClicked(IUser friend)
+        void friendListBox1_RemoveUserClicked(GGUser friend)
         {
             if (this.globalUserCache.CurrentUser.UserStatus == UserStatus.OffLine)
             {
@@ -1218,7 +1221,7 @@ namespace GGTalk
         #endregion  
         
     
-        public Image GetHeadImage(IUser user)
+        public Image GetHeadImage(GGUser user)
         {
             return GlobalResourceManager.GetHeadImage((GGUser)user);
         }

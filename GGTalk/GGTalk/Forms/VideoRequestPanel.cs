@@ -9,6 +9,9 @@ using ESBasic;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 视频请求面板。
+    /// </summary>
     public partial class VideoRequestPanel : UserControl
     {
         /// <summary>

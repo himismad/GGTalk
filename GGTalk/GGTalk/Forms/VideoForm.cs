@@ -23,6 +23,9 @@ namespace GGTalk
         ConnectorDisconnected
     }
 
+    /// <summary>
+    /// 视频聊天窗口。
+    /// </summary>
     public partial class VideoForm : BaseForm
     {
         private HungUpCauseType hungUpCauseType = HungUpCauseType.ActiveHungUp;

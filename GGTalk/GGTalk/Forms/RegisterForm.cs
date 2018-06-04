@@ -12,9 +12,11 @@ using System.Diagnostics;
 using System.Configuration;
 using ESBasic.Security;
 
-
 namespace GGTalk
 {
+    /// <summary>
+    /// 注册窗口。
+    /// </summary>
     public partial class RegisterForm : BaseForm
     {
         private int headImageIndex = 0;

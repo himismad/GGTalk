@@ -20,6 +20,9 @@ using GGTalk;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 修改个人资料窗口。
+    /// </summary>
     public partial class UpdateUserInfoForm : BaseForm
     {
         private int headImageIndex = 0;

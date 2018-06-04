@@ -45,9 +45,10 @@
             this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel1.BorderColor = System.Drawing.Color.White;
             this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel1.Location = new System.Drawing.Point(15, 58);
+            this.skinLabel1.Location = new System.Drawing.Point(20, 72);
+            this.skinLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Size = new System.Drawing.Size(68, 17);
+            this.skinLabel1.Size = new System.Drawing.Size(84, 20);
             this.skinLabel1.TabIndex = 0;
             this.skinLabel1.Text = "好友帐号：";
             // 
@@ -57,24 +58,24 @@
             this.skinTextBox_id.Icon = null;
             this.skinTextBox_id.IconIsButton = false;
             this.skinTextBox_id.IconMouseState = CCWin.SkinClass.ControlState.Normal;
-            this.skinTextBox_id.Location = new System.Drawing.Point(78, 53);
+            this.skinTextBox_id.Location = new System.Drawing.Point(104, 66);
             this.skinTextBox_id.Margin = new System.Windows.Forms.Padding(0);
-            this.skinTextBox_id.MinimumSize = new System.Drawing.Size(28, 28);
+            this.skinTextBox_id.MinimumSize = new System.Drawing.Size(37, 35);
             this.skinTextBox_id.MouseBack = null;
             this.skinTextBox_id.MouseState = CCWin.SkinClass.ControlState.Normal;
             this.skinTextBox_id.Name = "skinTextBox_id";
             this.skinTextBox_id.NormlBack = null;
-            this.skinTextBox_id.Padding = new System.Windows.Forms.Padding(5);
-            this.skinTextBox_id.Size = new System.Drawing.Size(193, 28);
+            this.skinTextBox_id.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.skinTextBox_id.Size = new System.Drawing.Size(257, 35);
             // 
             // skinTextBox_id.BaseText
             // 
             this.skinTextBox_id.SkinTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.skinTextBox_id.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.skinTextBox_id.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
-            this.skinTextBox_id.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.skinTextBox_id.SkinTxt.Location = new System.Drawing.Point(7, 6);
             this.skinTextBox_id.SkinTxt.Name = "BaseText";
-            this.skinTextBox_id.SkinTxt.Size = new System.Drawing.Size(183, 18);
+            this.skinTextBox_id.SkinTxt.Size = new System.Drawing.Size(243, 22);
             this.skinTextBox_id.SkinTxt.TabIndex = 0;
             this.skinTextBox_id.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.skinTextBox_id.SkinTxt.WaterText = "";
@@ -89,11 +90,12 @@
             this.btnClose.DownBack = ((System.Drawing.Image)(resources.GetObject("btnClose.DownBack")));
             this.btnClose.DrawType = CCWin.SkinControl.DrawStyle.Img;
             this.btnClose.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnClose.Location = new System.Drawing.Point(202, 128);
+            this.btnClose.Location = new System.Drawing.Point(269, 160);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClose.MouseBack = ((System.Drawing.Image)(resources.GetObject("btnClose.MouseBack")));
             this.btnClose.Name = "btnClose";
             this.btnClose.NormlBack = ((System.Drawing.Image)(resources.GetObject("btnClose.NormlBack")));
-            this.btnClose.Size = new System.Drawing.Size(69, 24);
+            this.btnClose.Size = new System.Drawing.Size(92, 30);
             this.btnClose.TabIndex = 133;
             this.btnClose.Text = "确定";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -108,11 +110,12 @@
             this.skinButton1.DownBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.DownBack")));
             this.skinButton1.DrawType = CCWin.SkinControl.DrawStyle.Img;
             this.skinButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinButton1.Location = new System.Drawing.Point(127, 128);
+            this.skinButton1.Location = new System.Drawing.Point(169, 160);
+            this.skinButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.skinButton1.MouseBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.MouseBack")));
             this.skinButton1.Name = "skinButton1";
             this.skinButton1.NormlBack = ((System.Drawing.Image)(resources.GetObject("skinButton1.NormlBack")));
-            this.skinButton1.Size = new System.Drawing.Size(69, 24);
+            this.skinButton1.Size = new System.Drawing.Size(92, 30);
             this.skinButton1.TabIndex = 133;
             this.skinButton1.Text = "取消";
             this.skinButton1.UseVisualStyleBackColor = false;
@@ -125,9 +128,10 @@
             this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel2.BorderColor = System.Drawing.Color.White;
             this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel2.Location = new System.Drawing.Point(15, 93);
+            this.skinLabel2.Location = new System.Drawing.Point(20, 116);
+            this.skinLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(68, 17);
+            this.skinLabel2.Size = new System.Drawing.Size(84, 20);
             this.skinLabel2.TabIndex = 0;
             this.skinLabel2.Text = "好友分组：";
             // 
@@ -136,19 +140,20 @@
             this.skinComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.skinComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.skinComboBox1.FormattingEnabled = true;
-            this.skinComboBox1.Location = new System.Drawing.Point(78, 90);
+            this.skinComboBox1.Location = new System.Drawing.Point(104, 112);
+            this.skinComboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.skinComboBox1.Name = "skinComboBox1";
-            this.skinComboBox1.Size = new System.Drawing.Size(193, 22);
+            this.skinComboBox1.Size = new System.Drawing.Size(256, 26);
             this.skinComboBox1.TabIndex = 134;
             this.skinComboBox1.WaterText = "";
             // 
             // AddFriendForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Back = ((System.Drawing.Image)(resources.GetObject("$this.Back")));
             this.BorderPalace = ((System.Drawing.Image)(resources.GetObject("$this.BorderPalace")));
-            this.ClientSize = new System.Drawing.Size(293, 173);
+            this.ClientSize = new System.Drawing.Size(391, 216);
             this.CloseDownBack = global::GGTalk.Properties.Resources.btn_close_down;
             this.CloseMouseBack = global::GGTalk.Properties.Resources.btn_close_highlight;
             this.CloseNormlBack = global::GGTalk.Properties.Resources.btn_close_disable;
@@ -159,6 +164,7 @@
             this.Controls.Add(this.skinLabel2);
             this.Controls.Add(this.skinLabel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaxDownBack = global::GGTalk.Properties.Resources.btn_max_down;
             this.MaxMouseBack = global::GGTalk.Properties.Resources.btn_max_highlight;
             this.MaxNormlBack = global::GGTalk.Properties.Resources.btn_max_normal;

@@ -12,9 +12,11 @@ using ESBasic.Helpers;
 using JustLib.Records;
 using JustLib;
 
-
 namespace GGTalk
 {
+    /// <summary>
+    /// 客户端全局资源管理器。
+    /// </summary>
     internal class GlobalResourceManager
     {
         #region PreInitialize

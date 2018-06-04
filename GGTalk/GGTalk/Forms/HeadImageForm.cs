@@ -10,6 +10,9 @@ using CCWin;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 上传头像/选择头像 窗口。
+    /// </summary>
     public partial class HeadImageForm : BaseForm
     {
         public HeadImageForm()

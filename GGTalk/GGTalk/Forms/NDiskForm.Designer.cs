@@ -1,5 +1,6 @@
 ﻿
 using JustLib.NetworkDisk.Passive;
+using GGTalk.Controls;
 namespace GGTalk
 {
     partial class NDiskForm

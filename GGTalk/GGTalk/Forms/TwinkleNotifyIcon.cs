@@ -13,6 +13,7 @@ using JustLib;
 
 namespace GGTalk
 {
+    #region support
     public enum UnhandleMessageType
     {
         Friend = 0,
@@ -36,7 +37,7 @@ namespace GGTalk
         Icon GetStatusIcon(UserStatus status);
     }
 
-    
+
     public interface IChatForm
     {
         void HandleReceivedMessage(List<Parameter<int, byte[], object>> MessageList);
@@ -47,7 +48,8 @@ namespace GGTalk
     {
         void HandleReceivedMessage(List<Parameter<string, int, byte[]>> MessageList);
         void HandleReceivedMessage(string broadcasterID, int broadcastType, byte[] content);
-    }
+    } 
+    #endregion
 
     /// <summary>
     /// 会闪动的托盘图标。缓存未处理的好友或群 消息。

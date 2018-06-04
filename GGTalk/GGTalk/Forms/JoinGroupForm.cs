@@ -9,13 +9,14 @@ using CCWin;
 using CCWin.Win32;
 using CCWin.Win32.Const;
 using System.Diagnostics;
-
 using System.Configuration;
 using ESPlus.Rapid;
 
-
 namespace GGTalk
 {
+    /// <summary>
+    /// 加入群/组 窗口。
+    /// </summary>
     internal partial class JoinGroupForm : BaseForm
     {       
         private IRapidPassiveEngine rapidPassiveEngine;

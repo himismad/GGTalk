@@ -1,4 +1,4 @@
-﻿using JustLib.Controls;
+﻿using GGTalk.Controls;
 namespace GGTalk
 {
     partial class ChatForm
@@ -76,10 +76,10 @@ namespace GGTalk
             this.skinLabel1 = new CCWin.SkinControl.SkinLabel();
             this.skinButton_send = new CCWin.SkinControl.SkinButton();
             this.skinLabel_inputing = new CCWin.SkinControl.SkinLabel();
-            this.chatBox_history = new JustLib.Controls.ChatBox();
-            this.chatBoxSend = new JustLib.Controls.ChatBox();
+            this.chatBox_history = new GGTalk.Controls.ChatBox();
+            this.chatBoxSend = new GGTalk.Controls.ChatBox();
             this.skinAnimator1 = new CCWin.SkinControl.SkinAnimator(this.components);
-            this.gifBox_wait = new JustLib.Controls.GifBox();
+            this.gifBox_wait = new GGTalk.Controls.GifBox();
             this.ToolFile = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripMenuItem32 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem33 = new System.Windows.Forms.ToolStripMenuItem();
@@ -817,7 +817,7 @@ namespace GGTalk
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatBox_history.BackColor = System.Drawing.Color.White;
             this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBox_history.ContextMenuMode = JustLib.Controls.ChatBoxContextMenuMode.ForOutput;
+            this.chatBox_history.ContextMenuMode = GGTalk.Controls.ChatBoxContextMenuMode.ForOutput;
             this.skinAnimator1.SetDecoration(this.chatBox_history, CCWin.SkinControl.DecorationType.None);
             this.chatBox_history.Location = new System.Drawing.Point(1, 91);
             this.chatBox_history.Name = "chatBox_history";
@@ -833,7 +833,7 @@ namespace GGTalk
             this.chatBoxSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatBoxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBoxSend.ContextMenuMode = JustLib.Controls.ChatBoxContextMenuMode.ForInput;
+            this.chatBoxSend.ContextMenuMode = GGTalk.Controls.ChatBoxContextMenuMode.ForInput;
             this.skinAnimator1.SetDecoration(this.chatBoxSend, CCWin.SkinControl.DecorationType.None);
             this.chatBoxSend.Location = new System.Drawing.Point(1, 378);
             this.chatBoxSend.Name = "chatBoxSend";

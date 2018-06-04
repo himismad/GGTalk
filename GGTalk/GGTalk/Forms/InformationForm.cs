@@ -13,6 +13,9 @@ using System.Diagnostics;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 启动时，右下托盘提示窗口。
+    /// </summary>
     public partial class InformationForm : BaseForm
     {
         public InformationForm(string id,string name, Image title)

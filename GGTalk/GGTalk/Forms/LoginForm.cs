@@ -19,10 +19,11 @@ using System.Configuration;
 using ESBasic.Security;
 using JustLib;
 
-
-
 namespace GGTalk
 {
+    /// <summary>
+    /// 登录窗口。
+    /// </summary>
     public partial class LoginForm : BaseForm
     {
         private IRemotingService remotingService;

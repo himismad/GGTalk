@@ -16,6 +16,9 @@ using ESPlus.Serialization;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 创建群/组的窗口。
+    /// </summary>
     public partial class CreateGroupForm : BaseForm
     {       
         private IRapidPassiveEngine rapidPassiveEngine;

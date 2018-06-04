@@ -18,19 +18,20 @@ using ESPlus.Application.P2PSession.Passive;
 using ESPlus.FileTransceiver;
 using ESBasic;
 using OMCS.Passive;
-
 using ESBasic.ObjectManagement.Managers;
 using JustLib;
 using ESBasic.Helpers;
-
 using ESPlus.Application;
 using ESPlus.Serialization;
 using OMCS.Passive.Audio;
-using JustLib.Controls;
+using GGTalk.Controls;
 using JustLib.Records;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 群/组聊天窗口。
+    /// </summary>
     public partial class GroupChatForm : BaseForm, IManagedForm<string>, IGroupChatForm
     {
         private IChatSupporter ggSupporter;

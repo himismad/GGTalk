@@ -1,4 +1,4 @@
-﻿using JustLib.Controls;
+﻿using GGTalk.Controls;
 namespace GGTalk
 {
     partial class VideoForm
@@ -42,12 +42,12 @@ namespace GGTalk
             this.skinLabel_tip = new CCWin.SkinControl.SkinLabel();
             this.skinPanel_tool = new CCWin.SkinControl.SkinPanel();
             this.button_record = new CCWin.SkinControl.SkinButton();
-            this.decibelDisplayer_speaker = new JustLib.Controls.DecibelDisplayer();
-            this.decibelDisplayer_mic = new JustLib.Controls.DecibelDisplayer();
+            this.decibelDisplayer_speaker = new GGTalk.Controls.DecibelDisplayer();
+            this.decibelDisplayer_mic = new GGTalk.Controls.DecibelDisplayer();
             this.skinCheckBox_camera = new CCWin.SkinControl.SkinCheckBox();
             this.skinCheckBox_my = new CCWin.SkinControl.SkinCheckBox();
             this.timerLabel1 = new ESBasic.Widget.TimerLabel();
-            this.channelQualityDisplayer1 = new JustLib.Controls.ChannelQualityDisplayer();
+            this.channelQualityDisplayer1 = new GGTalk.Controls.ChannelQualityDisplayer();
             this.skinCheckBox_mic = new CCWin.SkinControl.SkinCheckBox();
             this.skinCheckBox_speaker = new CCWin.SkinControl.SkinCheckBox();
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();

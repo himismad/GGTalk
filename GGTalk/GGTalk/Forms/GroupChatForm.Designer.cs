@@ -1,4 +1,4 @@
-﻿using JustLib.Controls;
+﻿using GGTalk.Controls;
 namespace GGTalk
 {
     partial class GroupChatForm
@@ -49,9 +49,9 @@ namespace GGTalk
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.skinButton_send = new CCWin.SkinControl.SkinButton();
-            this.chatBox_history = new JustLib.Controls.ChatBox();
-            this.chatBoxSend = new JustLib.Controls.ChatBox();
-            this.gifBox_wait = new JustLib.Controls.GifBox();
+            this.chatBox_history = new GGTalk.Controls.ChatBox();
+            this.chatBoxSend = new GGTalk.Controls.ChatBox();
+            this.gifBox_wait = new GGTalk.Controls.GifBox();
             this.pnlTx.SuspendLayout();
             this.skToolMenu.SuspendLayout();
             this.SuspendLayout();
@@ -364,7 +364,7 @@ namespace GGTalk
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatBox_history.BackColor = System.Drawing.Color.White;
             this.chatBox_history.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBox_history.ContextMenuMode = JustLib.Controls.ChatBoxContextMenuMode.ForOutput;
+            this.chatBox_history.ContextMenuMode = GGTalk.Controls.ChatBoxContextMenuMode.ForOutput;
             this.chatBox_history.Location = new System.Drawing.Point(1, 58);
             this.chatBox_history.Name = "chatBox_history";
             this.chatBox_history.PopoutImageWhenDoubleClick = true;
@@ -379,7 +379,7 @@ namespace GGTalk
             this.chatBoxSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatBoxSend.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.chatBoxSend.ContextMenuMode = JustLib.Controls.ChatBoxContextMenuMode.ForInput;
+            this.chatBoxSend.ContextMenuMode = GGTalk.Controls.ChatBoxContextMenuMode.ForInput;
             this.chatBoxSend.Location = new System.Drawing.Point(1, 438);
             this.chatBoxSend.Name = "chatBoxSend";
             this.chatBoxSend.PopoutImageWhenDoubleClick = false;

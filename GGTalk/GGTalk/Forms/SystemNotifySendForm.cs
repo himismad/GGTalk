@@ -13,9 +13,11 @@ using System.Configuration;
 using ESPlus.Rapid;
 using ESPlus.Serialization;
 
-
 namespace GGTalk
 {
+    /// <summary>
+    /// 用于发送系统通知的窗口。
+    /// </summary>
     internal partial class SystemNotifySendForm : BaseForm
     {      
         private IRapidPassiveEngine rapidPassiveEngine;

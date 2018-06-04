@@ -15,7 +15,7 @@ using ESPlus.Rapid;
 using CCWin.SkinControl;
 using ESBasic;
 using JustLib;
-using JustLib.Controls;
+using GGTalk.Controls;
 using JustLib.Records;
 using ESPlus.Serialization;
 
@@ -26,6 +26,9 @@ namespace GGTalk
         string GetUserName(string userID);
     }
 
+    /// <summary>
+    /// 聊天记录查看窗口。
+    /// </summary>
     public partial class ChatRecordForm : BaseForm
     {
         private IChatRecordPersister remotePersister;

@@ -15,6 +15,9 @@ using ESPlus.Rapid;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 添加好友。
+    /// </summary>
     internal partial class AddFriendForm : BaseForm
     {      
         private IRapidPassiveEngine rapidPassiveEngine;

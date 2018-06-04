@@ -11,7 +11,7 @@ using OMCS.Passive;
 namespace GGTalk
 {
     /// <summary>
-    /// 远程桌面的主人控制面板
+    /// 语音聊天控制面板
     /// </summary>
     public partial class AudioHandlePanel : UserControl
     {

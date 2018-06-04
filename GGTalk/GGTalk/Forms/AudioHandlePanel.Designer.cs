@@ -1,4 +1,4 @@
-﻿using JustLib.Controls;
+﻿using GGTalk.Controls;
 namespace GGTalk
 {
     partial class AudioHandlePanel

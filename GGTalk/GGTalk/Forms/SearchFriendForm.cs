@@ -16,6 +16,9 @@ using JustLib;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 查找用户 窗口。
+    /// </summary>
     internal partial class SearchFriendForm : BaseForm
     {
         private MainForm mainForm;       

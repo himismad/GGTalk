@@ -16,7 +16,7 @@ using JustLib.NetworkDisk.Server;
 using DataRabbit.DBAccessing;
 
 /*
- * 本demo采用的是ESFramework的免费版本，不需要再次授权、也没有使用期限限制。若想获取ESFramework其它版本，请联系 www.oraycn.com 或 QQ：372841921。
+ * 本demo采用的是ESFramework的免费版本，不需要再次授权。若想获取ESFramework其它版本，请联系 www.oraycn.com。
  * 
  */
 namespace GGTalk.Server

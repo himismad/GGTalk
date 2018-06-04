@@ -10,6 +10,9 @@ using CCWin;
 
 namespace GGTalk
 {
+    /// <summary>
+    /// 拍照（自拍头像）窗口。
+    /// </summary>
     public partial class PhotoForm : BaseForm
     {     
         public PhotoForm()
